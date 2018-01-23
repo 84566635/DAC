@@ -1,0 +1,18 @@
+Uzywanie skryptow:
+
+Aby zaktualizowac oprogramowanie, konfigracje  lub jego czesc nalezy odpowiednie pliki wgrac na pendrive i uruchomic  VARI z wlozonym pendrive
+
+1) cdacc4037a75e44baf6db039a4fea85b.sh - plik obowizkowy. Jest zawsze uruchamiany i z niego inicjoawne sa inne akcje
+2) setwifi.sh - opcjonalny plik z nowa konfiguracja WiFi
+3) start_bb.sh, bb_controller, bb_player  - pliki umieszczane na karcie tylko gdy sie zmienia. Aczkolwiek ich obecnosc nie zaszkodzi
+4) flash.sh, bb_flash - opcjnalny. Uzywany gdy nalezy zafashowac MADO, SMOKi lub sharki. Plik wymaga uzupelnienia komend w zaleznosci od zapotrzebowania na konkretne flashowanie. Nalezy zalaczyc tez odpowiednie binarki.
+5) delayed_diag.sh - opozniona diagnostyka. Opcjonalna. Potrzebna np. do testu sieci.
+6) sharc.sh, sharc.bat - programowanie sharc poprzez Vari wykorzystujaz zdalna konsole.
+   wywolanie sharc.bat adres_ip_vari port_ssh maska_smokow plik_obrazu_sharc
+   np.: sharc.bat 192.168.11.3 22 00000010 sharc.bin
+
+7) send_all.bat wyslanie wszytkich plikow na Vari (bb_player, bb_controller, start_bb.sh)
+  np.: send_all.bat 192.168.11.3 22
+
+
+

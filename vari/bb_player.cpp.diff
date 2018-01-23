@@ -1,0 +1,99 @@
+Index: bb_player.cpp
+===================================================================
+--- bb_player.cpp	(revision 553)
++++ bb_player.cpp	(revision 664)
+@@ -28,6 +28,7 @@
+ #include <arpa/inet.h>
+ #include <linux/spi/spidev.h>
+ #include <sched.h>
++#include <semaphore.h>
+ 
+ #define WRITE_INT_TO_BUF(buf, off, i)	{ buf[off + 3] = i >> 24; buf[off + 2] = (i >> 16) & 0xFF; buf[off + 1] = (i >> 8) & 0xFF; buf[off] = i & 0xFF; }
+ #define BUF_TO_INT(buf, off)		((buf[off + 3] << 24) | (buf[off + 2] << 16) | (buf[off + 1] << 8) | buf[off])
+@@ -67,6 +68,13 @@
+ int file_mode[2] {0, 0}, curr_song_pos[2] {0, 0}, total_song_time[2] {0, 0};
+ int fd1[2], fd2[2];
+ 
++static uint64_t getNow(void)
++{
++  struct timeval now;
++  gettimeofday(&now, NULL);
++  return (uint64_t)now.tv_usec + 1000000ULL*(uint64_t)now.tv_sec;
++}
++
+ int net_init(bool reconnect, int portno, int &net_fd1, int &net_fd2)
+ {
+   socklen_t clilen;
+@@ -270,6 +278,8 @@
+ volatile bool audio_buf_filled[2] {false, false};
+ volatile bool finish_thread {false};
+ pthread_mutex_t mutex[2] { PTHREAD_MUTEX_INITIALIZER, PTHREAD_MUTEX_INITIALIZER };
++static sem_t refillSignal[2];
++static int useSem = 0;
+ volatile AVSampleFormat _av_sample_format[2];
+ int _av_sample_rate[2] {0, 0}, _av_channels_nb[2] {0, 0};
+ 
+@@ -428,7 +438,7 @@
+   mode = 0;
+   ret = ioctl(fd, SPI_IOC_RD_LSB_FIRST, &mode);
+   if (ret == -1) return -1;
+-  mode = 8;
++  mode = 16;
+   ret = ioctl(fd, SPI_IOC_WR_BITS_PER_WORD, &mode);
+   if (ret == -1) return -1;
+   std::cout << "SPI device initialized\n";
+@@ -529,7 +539,7 @@
+   memcpy(buf[0], head, sizeof(head));
+   memcpy(buf[1], head, sizeof(head));
+   memcpy(&buf[1][16 + STM_AUDIO_BUFFER_SIZE], tail, sizeof(tail));
+-  fd_spi = spi_player_init_params(std::string("spi"), 12000000);
++  fd_spi = spi_player_init_params(std::string("spi"), 16000000);
+   if (fd_spi < 0)
+     {
+       std::cout << "Error cannot open SPI device\n";
+@@ -632,6 +642,10 @@
+               memset(((unsigned char*)buf[thread_id]) + 32, 0, STM_AUDIO_BUFFER_SIZE_BYTES);
+               threshold[thread_id] = 10 * STM_AUDIO_BUFFER_SIZE_BYTES;
+             }
++          if(useSem)
++            {
++              sem_post(&refillSignal[thread_id]);
++            }
+           ((unsigned char*)buf[thread_id])[4] = (unsigned int)_av_sample_rate[thread_id] / 1000;
+           ((unsigned char*)buf[thread_id])[5] = _av_sample_format[thread_id] == AV_SAMPLE_FMT_S32 ? 3 : 1;
+           memcpy(((unsigned char*)buf[0]) + 32 + STM_AUDIO_BUFFER_SIZE_BYTES, tail, sizeof(tail));
+@@ -907,7 +921,16 @@
+                                   break;
+                                 }
+                               else
+-                                usleep(20000);
++                                {
++                                  if(useSem)
++                                    {
++                                      sem_wait(&refillSignal[thread_id]);
++                                    }
++                                  else
++                                    {
++                                      usleep(10);
++                                    }
++                                }
+                             }
+                           else
+                             {
+@@ -995,10 +1018,16 @@
+   // Increase priority for this thread
+   pthread_t this_thread = pthread_self();
+   struct sched_param sched_params;
++
++  sem_init(&refillSignal[0], 0, 1);
++  sem_init(&refillSignal[1], 0, 1);
++
+   pthread_getschedparam(this_thread, &a, &sched_params);
+   sched_params.sched_priority = sched_get_priority_min(a) + (4 * (sched_get_priority_max(a) - sched_get_priority_min(a))) / 5;
+   if (pthread_setschedparam(this_thread, a, &sched_params) != 0) std::cout << "Unsuccessful in setting thread priority\n";
+   if (argc > 1) a = argv[1][0];
++  if (argc > 3) if(memcmp(argv[3], "useSem", 6) == 0) useSem = 1;
++
+   switch(a)
+     {
+     case '3':

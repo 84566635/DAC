@@ -1,0 +1,86 @@
+
+Biblioteki dostarczane z zewnatrz
+./library/library_STM32F10x           - biblioteka HW dla STM32F10x dostarczana przez ST
+./library/library_STM32F4xx           - biblioteka HW dla STM32F40x dostarczana przez ST
+./library/freeRTOS                    - RTOS
+./library/ehif_lib                    - obsluga modulow radiowych TI
+
+Biblioteki towrzone na potrzeby projektu Infado
+./library/inc/hwCommunicator.h
+./library/src/hwCommunicator.c        - modul komunikacji z portem HW. 
+./library/inc/hwCommunicatorUSARTHelper.h
+./library/src/hwCommunicatorUSARTHelper.c        - częśc modul komunikacji HW  dla UARTa.  
+./library/inc/hwCommunicatorSPIHelper.h
+./library/src/hwCommunicatorSPIHelper.c        - częśc modul komunikacji  HW dla SPI i radia na SPI. 
+./library/inc/stm32f10x_hwInit.h        
+./library/src/stm32f10x_hwInit.c        
+./library/inc/stm32f4xx_hwInit.h        
+./library/src/stm32f4xx_hwInit.c      - makra i funkcje do obslugi HW specyficzne dla uzywanego procesora. 
+./library/src/messageProcessor.c      - Podstawowe funkcje do obslugi komunikatow. Obsluga timeoutow. 
+./library/src/messageProcessorSMOK.c  - Funkcje do obslugi komunikatow SMOKa  
+./library/src/messageProcessorMADO.c  - Funkcje do obslugi komunikatow MADO  
+
+
+./library/inc/bqueue.h
+./library/src/bqueue.c                - oblsuga kolejek i puli buforow pamieci uzywanych do komunikacji
+
+./library/inc/led.h
+./library/src/led.c                   - oblsuga LED
+
+./library/inc/wm8805.h
+./library/src/wm8805.c                   - oblsuga wm8805/04 (Wolfson)
+
+./library/inc/startup.h
+./library/src/startup.c               - funkcje do obslugi przerwan plus startup systemu
+
+./library/inc/uit_monitor.h
+./library/src/uit_monitor.c           - funkcje do monitorowania stanu SMOKa (napiecia, temperatury)
+
+./library/inc/common.h
+./library/src/common.c                - wspolne funkcje dla systemu
+
+./library/inc/moduleCommon.h
+./library/src/moduleCommon.c          - obsluga modulu na ktorym bazuje hwCommunicator, Communicator i LED.
+
+./library/inc/communicator.h
+./library/src/communicator.c          - glowny modul przetwarzajacy komunikaty, wysylajacy potwierdzenia itp.
+./library/inc/adc.h
+./library/src/adc.c                   - obsluga przrtwornikow ADC
+
+./library/inc/cc85xx_control_slv.h    - funkcje do obslugi radia (specyficzne dla slave'a)
+./library/src/cc85xx_control_slv.c
+./library/inc/cc85xx_control_mst.h    - funkcje do obslugi radia (specyficzne dla master'a)
+./library/src/cc85xx_control_mst.c
+./library/inc/cc85xx_common.h         - funkcje do obslugi radia (wspólne dla slave'a i master'a)
+./library/src/cc85xx_common.c
+
+./project/inc/FreeRTOSConfig.h 	      
+./project/Makefile	
+./project/gcc_arm_M4.ld
+./project/src/main.c                  
+./project/src/hwInit.c                - inicjalizacja sprzetowa (peryferia) plytki projektu (MA,SMOK)                  
+./project/inc/project.h               - pliki projektu. Wybor komponentow z biblioteki, konfiguracja ich, oraz dodatkowe 
+
+Pliki obslugi audio
+./library/*/audio/convert.*      - glowny modul obslugujacy audio - kolejkowanie, przetwarzanie (konwersje formatow), przekierowywanie pomiedzy peryferiami audio (USB, SPI, I2S) na SAI 
+
+Obsluga I2S (z wolfson'ow)
+./library/*/audio/i2sStream.*
+./project_ma/*/i2sConfig.c 
+
+Obsluga SPI 
+./library/*/audio/spiStream.*
+./project_ma/*/i2sAudioStreamConfig.* 
+
+Obsluga SAI 
+./project_ma/*/saihwInit.* 
+
+Oblsuga USB
+./libusbaudio/Middlewares/ST/STM32_USB_Device_Library/Class/AUDIO/Src/usbd_audio.c  - odbieranie dzwieku z USB i przesylanie do konwersji. 
+        Takze zdefiniowany jest tu deskryptor endpointow audio. Generalnie najwazniejszy plik w module USB
+./libusbaudio - biblioteka do obslugi USB oparta o nowe biblioteki peryferiow ST. Reszzta projektu jest oparta o stare biblioteki
+        Jest budowana jako osobny projekt i linkowana dopiero na koniec budowania projektu MADO.
+        Projekt wygenerowany w CubeMX i zmodyfikowany do wymagan MADO.
+        
+
+        

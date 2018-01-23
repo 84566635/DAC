@@ -1,0 +1,1 @@
+./configure --enable-cross-compile --arch=armv7-a --target-os=linux --cross-prefix=/home/infado/share/ti-sdk-am335x-evm-07.00.00.00/linux-devkit/sysroots/i686-arago-linux/usr/bin/arm-linux-gnueabihf- --prefix=/home/infado/ti-sdk-am335x-evm-07.00.00.00/targetNFS/usr --enable-shared --enable-pic --disable-static --enable-debug=gdb3

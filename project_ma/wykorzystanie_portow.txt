@@ -1,0 +1,67 @@
+﻿Porty:
+	# SAI_BlockA
+
+	PE6   ->   SAI1_SD_A    
+	PE4   ->   SAI1_FS_A    
+	PE2   ->   SAI1_MCLK_A  
+	PE5   ->   SAI1_SCK_A   
+
+	# SAI_BlockB
+
+	PF6 -> SAI1_SD_B   
+	PF9 -> SAI1_FS_B   
+	PF7 -> SAI1_MCLK_B 
+	PF8 -> SAI1_SCK_B  
+
+	# 2x Radio (SPI3):
+
+	PC8 	->	CS1
+	PC6 	->	CS1
+	PC10	->	SCK
+	PC11	->	MISO
+	PC12	->	MOSI
+	// jeszcze nie uzywane
+	PC7	->	INT1
+	PC9	->	INT2
+	PC4	->	reset1
+	PC5	-> 	reset2
+
+
+	# Olinuxino SPI Interface (SPI1):
+
+	PA4   ->   CS    
+	PA5   ->   SCK
+	PA6   ->   MISO
+	PA7   ->   MOSI
+
+	# UART
+	
+	PA2		CEN USART2		
+	PA3		CEN USART2	
+
+	PB6		PER1 USART1	
+	PB7 	PER1 USART1
+
+	PD8		PER2 USART3	
+	PD9 	PER2 USART3
+	
+	PA0		Debug console:UART4
+	PA1		Debug console:UART4
+
+
+
+
+
+DMA Streams:
+	DMA1:
+		s7		SPI3_TX			(I2S3 TX)
+	
+	DMA2:
+		s0		SPI4_RX			(olinuxino - sygnał audio)
+		s1		SAI1_A
+		s2		SPI1_RX			(RADIO RX)
+		s3		SPI1_TX			(RADIO TX)
+		s4		SAI1_B
+
+	
+	

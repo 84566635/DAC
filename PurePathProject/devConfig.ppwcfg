@@ -1,0 +1,1690 @@
+<!DOCTYPE devcfg SYSTEM "devcfg.dtd"[]>
+<devcfg>
+<name>Analog Output Slave (AIC3101)</name>
+<type>Slave/Stereo output satellite</type>
+<hardware_platform>PurePath Wireless EB</hardware_platform>
+<operation>Host control</operation>
+<usb_descriptor></usb_descriptor>
+<mini_prod_test_en>0</mini_prod_test_en>
+<pwc_rev>1.4.2</pwc_rev>
+<desc>Audio connections:
+- Audio output: LINE OUT + HEADPHONE
+
+User interface:
+- Pairing button: SW9 (click)
+- Volume up: SW1 (click+repeat)
+- Volume down: SW3 (click+repeat)
+- Mute toggle: SW2 (click)
+- Network status LED: D9</desc>
+<task>
+<name>Advanced Options</name>
+<attr>
+<name>Acquire timeslot period</name>
+<value>5750 us</value>
+</attr>
+<attr>
+<name>Fade out when muting</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Protocol version</name>
+<value>0</value>
+</attr>
+<attr>
+<name>RF data rate</name>
+<value>5 Mbps</value>
+</attr>
+<attr>
+<name>Store dynamic audio channel selection</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Store local input volume</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Store local output balance</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Store local output volume</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Store network ID</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Store remote input volume</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Store remote output volume</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Timeslot alignment</name>
+<value>Disabled</value>
+</attr>
+<attr>
+<name>Timeslot period</name>
+<value>Automatic selection</value>
+</attr>
+</task>
+<task>
+<name>Audio Device Customization</name>
+<attr>
+<name>ACTIVE to LOW-POWER</name>
+<value></value>
+</attr>
+<attr>
+<name>Enable digital audio input valid pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>INACTIVE to LOW-POWER</name>
+<value></value>
+</attr>
+<attr>
+<name>INACTIVE to SR-SWITCH</name>
+<value></value>
+</attr>
+<attr>
+<name>LOW-POWER to ACTIVE</name>
+<value></value>
+</attr>
+<attr>
+<name>LOW-POWER to INACTIVE</name>
+<value></value>
+</attr>
+<attr>
+<name>OFF to SR-SWITCH</name>
+<value></value>
+</attr>
+<attr>
+<name>SR-SWITCH 32000 to INACTIVE</name>
+<value></value>
+</attr>
+<attr>
+<name>SR-SWITCH 40275 to INACTIVE</name>
+<value></value>
+</attr>
+<attr>
+<name>SR-SWITCH 44100 to INACTIVE</name>
+<value></value>
+</attr>
+<attr>
+<name>SR-SWITCH 48000 to INACTIVE</name>
+<value></value>
+</attr>
+<attr>
+<name>SR-SWITCH to OFF</name>
+<value></value>
+</attr>
+</task>
+<task>
+<name>Audio Interface</name>
+<attr>
+<name>Audio device</name>
+<value>AIC3101</value>
+</attr>
+<attr>
+<name>BCLK multiplier</name>
+<value>64</value>
+</attr>
+<attr>
+<name>Clock source</name>
+<value>Internal with MCLK</value>
+</attr>
+<attr>
+<name>Custom setup</name>
+<value>Disabled</value>
+</attr>
+<attr>
+<name>Interface format</name>
+<value>I2S</value>
+</attr>
+<attr>
+<name>MCLK multiplier</name>
+<value>256</value>
+</attr>
+<attr>
+<name>Resolution</name>
+<value>16</value>
+</attr>
+</task>
+<task>
+<name>Audio Streaming Master Static</name>
+<attr>
+<name>Default sample rate</name>
+<value>44100</value>
+</attr>
+<attr>
+<name>M2S0 DSP IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S0 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S0 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S0 logical channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S0 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>M2S1 DSP IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S1 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S1 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S1 logical channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S1 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>M2S2 DSP IO channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>M2S2 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S2 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S2 logical channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>M2S2 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>M2S3 DSP IO channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>M2S3 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S3 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S3 logical channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>M2S3 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>M2S4 DSP IO channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>M2S4 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S4 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S4 logical channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>M2S4 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>M2S5 DSP IO channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>M2S5 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S5 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S5 logical channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>M2S5 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M0 DSP IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 logical channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M1 DSP IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M1 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M1 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M1 logical channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M1 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M2 DSP IO channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>S2M2 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M2 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M2 logical channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>S2M2 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M3 DSP IO channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>S2M3 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M3 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M3 logical channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>S2M3 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M4 DSP IO channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>S2M4 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M4 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M4 logical channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>S2M4 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M5 DSP IO channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>S2M5 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M5 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M5 logical channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>S2M5 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>SR32000 enabled</name>
+<value>1</value>
+</attr>
+<attr>
+<name>SR32000 latency</name>
+<value>1024</value>
+</attr>
+<attr>
+<name>SR40275 enabled</name>
+<value>1</value>
+</attr>
+<attr>
+<name>SR40275 latency</name>
+<value>1024</value>
+</attr>
+<attr>
+<name>SR44100 enabled</name>
+<value>1</value>
+</attr>
+<attr>
+<name>SR44100 latency</name>
+<value>1024</value>
+</attr>
+<attr>
+<name>SR48000 enabled</name>
+<value>1</value>
+</attr>
+<attr>
+<name>SR48000 latency</name>
+<value>1024</value>
+</attr>
+</task>
+<task>
+<name>Audio Streaming Slave Dynamic</name>
+<attr>
+<name>Dynamic selection count</name>
+<value>2</value>
+</attr>
+<attr>
+<name>Dynamic selection mechanism</name>
+<value>None</value>
+</attr>
+<attr>
+<name>IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S0 logical channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S1 logical channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S2 logical channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>M2S3 logical channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>M2S4 logical channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>M2S5 logical channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>M2S6 logical channel</name>
+<value>6</value>
+</attr>
+<attr>
+<name>M2S7 logical channel</name>
+<value>7</value>
+</attr>
+<attr>
+<name>S2M0 logical channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>S2M1 logical channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>S2M2 logical channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>S2M3 logical channel</name>
+<value>5</value>
+</attr>
+</task>
+<task>
+<name>Audio Streaming Slave EHIF</name>
+<attr>
+<name>M2S0 DSP IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S0 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S0 IO pin</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S1 DSP IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S1 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S1 IO pin</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S2 DSP IO channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>M2S2 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S2 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S3 DSP IO channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>M2S3 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S3 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S4 DSP IO channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>M2S4 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S4 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S5 DSP IO channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>M2S5 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S5 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 DSP IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M1 DSP IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M1 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M1 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M2 DSP IO channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>S2M2 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M2 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M3 DSP IO channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>S2M3 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M3 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M4 DSP IO channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>S2M4 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M4 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M5 DSP IO channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>S2M5 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M5 IO pin</name>
+<value>0</value>
+</attr>
+</task>
+<task>
+<name>Audio Streaming Slave Static</name>
+<attr>
+<name>M2S0 DSP IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S0 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S0 IO pin</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S0 logical channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S1 DSP IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S1 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S1 IO pin</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S1 logical channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S2 DSP IO channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>M2S2 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S2 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S2 logical channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>M2S3 DSP IO channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>M2S3 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S3 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S3 logical channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>M2S4 DSP IO channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>M2S4 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S4 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S4 logical channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>M2S5 DSP IO channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>M2S5 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S5 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S5 logical channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>S2M0 DSP IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 logical channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M1 DSP IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M1 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M1 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M1 logical channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M2 DSP IO channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>S2M2 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M2 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M2 logical channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>S2M3 DSP IO channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>S2M3 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M3 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M3 logical channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>S2M4 DSP IO channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>S2M4 I2S IO channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M4 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M4 logical channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>S2M5 DSP IO channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>S2M5 I2S IO channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M5 IO pin</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M5 logical channel</name>
+<value>5</value>
+</attr>
+</task>
+<task>
+<name>Audio Streaming USB Static</name>
+<attr>
+<name>M2S0 logical channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>M2S0 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>M2S1 logical channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>M2S1 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>M2S2 logical channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>M2S2 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>M2S3 logical channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>M2S3 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>M2S4 logical channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>M2S4 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>M2S5 logical channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>M2S5 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M0 logical channel</name>
+<value>0</value>
+</attr>
+<attr>
+<name>S2M0 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M1 logical channel</name>
+<value>1</value>
+</attr>
+<attr>
+<name>S2M1 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M2 logical channel</name>
+<value>2</value>
+</attr>
+<attr>
+<name>S2M2 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M3 logical channel</name>
+<value>3</value>
+</attr>
+<attr>
+<name>S2M3 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M4 logical channel</name>
+<value>4</value>
+</attr>
+<attr>
+<name>S2M4 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>S2M5 logical channel</name>
+<value>5</value>
+</attr>
+<attr>
+<name>S2M5 streaming format</name>
+<value>PCM16</value>
+</attr>
+<attr>
+<name>SR32000 enabled</name>
+<value>0</value>
+</attr>
+<attr>
+<name>SR32000 latency</name>
+<value>1024</value>
+</attr>
+<attr>
+<name>SR44100 enabled</name>
+<value>0</value>
+</attr>
+<attr>
+<name>SR44100 latency</name>
+<value>1024</value>
+</attr>
+<attr>
+<name>SR48000 enabled</name>
+<value>1</value>
+</attr>
+<attr>
+<name>SR48000 latency</name>
+<value>1024</value>
+</attr>
+</task>
+<task>
+<name>Device Identification</name>
+<attr>
+<name>Manufacturer ID</name>
+<value>00000001</value>
+</attr>
+<attr>
+<name>Product ID</name>
+<value>00000002</value>
+</attr>
+<attr>
+<name>Product name</name>
+<value>Stereo analog output slave demo (AIC3101)</value>
+</attr>
+<attr>
+<name>USB device release</name>
+<value></value>
+</attr>
+<attr>
+<name>USB product ID</name>
+<value></value>
+</attr>
+<attr>
+<name>USB vendor ID</name>
+<value></value>
+</attr>
+</task>
+<task>
+<name>Human Interface Device</name>
+<attr>
+<name>HID feature set</name>
+<value>Play control</value>
+</attr>
+</task>
+<task>
+<name>IO Mapping</name>
+<attr>
+<name>Active IO level</name>
+<value>00000</value>
+</attr>
+<attr>
+<name>Alternate network status LED</name>
+<value></value>
+</attr>
+<attr>
+<name>Audio channel selection bit 0</name>
+<value></value>
+</attr>
+<attr>
+<name>Audio channel selection bit 1</name>
+<value></value>
+</attr>
+<attr>
+<name>Audio channel selection bit 2</name>
+<value></value>
+</attr>
+<attr>
+<name>Audio channel selection button</name>
+<value></value>
+</attr>
+<attr>
+<name>Audio device PVDD control</name>
+<value></value>
+</attr>
+<attr>
+<name>Audio device reset control</name>
+<value>GIO2</value>
+</attr>
+<attr>
+<name>Digital audio input valid</name>
+<value>GIO12</value>
+</attr>
+<attr>
+<name>External host interface interrupt</name>
+<value>GIO1</value>
+</attr>
+<attr>
+<name>Fast forward RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Fast forward RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Input volume mute RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Input volume mute RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Local input volume down button</name>
+<value></value>
+</attr>
+<attr>
+<name>Local input volume mute button</name>
+<value></value>
+</attr>
+<attr>
+<name>Local input volume up button</name>
+<value></value>
+</attr>
+<attr>
+<name>Local output volume down button</name>
+<value>GIO3(C+H)</value>
+</attr>
+<attr>
+<name>Local output volume mute button</name>
+<value>GIO9_AD2(C)</value>
+</attr>
+<attr>
+<name>Local output volume up button</name>
+<value>GIO1(C+H)</value>
+</attr>
+<attr>
+<name>Mini production test control</name>
+<value></value>
+</attr>
+<attr>
+<name>Network pairing button</name>
+<value>CSN(C)</value>
+</attr>
+<attr>
+<name>Network standby control button</name>
+<value></value>
+</attr>
+<attr>
+<name>Network standby disable RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Network standby disable RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Network standby enable RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Network standby enable RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Network standby toggle RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Network standby toggle RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Network status LED</name>
+<value>GIO9_AD2</value>
+</attr>
+<attr>
+<name>Output balance left button</name>
+<value></value>
+</attr>
+<attr>
+<name>Output balance right button</name>
+<value></value>
+</attr>
+<attr>
+<name>Output volume decrement RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Output volume decrement RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Output volume increment RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Output volume increment RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Output volume mute RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Output volume mute RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Peripheral IO force pull in power-down</name>
+<value>00000</value>
+</attr>
+<attr>
+<name>Play-Pause RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Play-Pause RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Power control button</name>
+<value>CSN(H)</value>
+</attr>
+<attr>
+<name>Power-down indication</name>
+<value></value>
+</attr>
+<attr>
+<name>Remote input volume down button</name>
+<value></value>
+</attr>
+<attr>
+<name>Remote input volume mute button</name>
+<value></value>
+</attr>
+<attr>
+<name>Remote input volume up button</name>
+<value></value>
+</attr>
+<attr>
+<name>Remote output volume down button</name>
+<value>GIO3(C+H)</value>
+</attr>
+<attr>
+<name>Remote output volume mute button</name>
+<value>GIO9_AD2(C)</value>
+</attr>
+<attr>
+<name>Remote output volume up button</name>
+<value>GIO1(C+H)</value>
+</attr>
+<attr>
+<name>Rewind RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Rewind RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Scan next track RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Scan next track RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Scan previous track RC button</name>
+<value></value>
+</attr>
+<attr>
+<name>Scan previous track RC output</name>
+<value></value>
+</attr>
+<attr>
+<name>Timeslot alignment control input</name>
+<value></value>
+</attr>
+<attr>
+<name>Timeslot alignment control output</name>
+<value></value>
+</attr>
+</task>
+<task>
+<name>Power Management</name>
+<attr>
+<name>Input silence detection average threshold</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Input silence detection peak threshold</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Maximum current consumption</name>
+<value>100</value>
+</attr>
+<attr>
+<name>Power control</name>
+<value>None</value>
+</attr>
+<attr>
+<name>Power-down on audio input silence</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Power-down on audio input silence timeout</name>
+<value>1800</value>
+</attr>
+<attr>
+<name>Power-down on audio output silence</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Power-down on audio output silence timeout</name>
+<value>1800</value>
+</attr>
+<attr>
+<name>Power-down on network inactivity</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Power-down on network inactivity timeout</name>
+<value>300</value>
+</attr>
+<attr>
+<name>Power-reduction on audio input silence</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Power-reduction on audio input silence timeout</name>
+<value>5</value>
+</attr>
+<attr>
+<name>Power-reduction on audio output silence</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Power-reduction on audio output silence timeout</name>
+<value>300</value>
+</attr>
+<attr>
+<name>Power-reduction on network inactivity</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Power-reduction on network inactivity timeout</name>
+<value>30</value>
+</attr>
+<attr>
+<name>Power-reduction on network standby ADD state</name>
+<value>OFF</value>
+</attr>
+<attr>
+<name>VBAT monitoring</name>
+<value>0</value>
+</attr>
+<attr>
+<name>VBAT operation threshold</name>
+<value>3.100</value>
+</attr>
+<attr>
+<name>VBAT power-up threshold</name>
+<value>3.200</value>
+</attr>
+<attr>
+<name>VBAT resistor</name>
+<value>100000</value>
+</attr>
+<attr>
+<name>VBAT warning disable threshold</name>
+<value>3.500</value>
+</attr>
+<attr>
+<name>VBAT warning enable threshold</name>
+<value>3.350</value>
+</attr>
+</task>
+<task>
+<name>Radio</name>
+<attr>
+<name>Antenna diversity enable</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Default network ID</name>
+<value>FFFFFFFE</value>
+</attr>
+<attr>
+<name>Maximum slave count</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Normal LBT threshold</name>
+<value>-65</value>
+</attr>
+<attr>
+<name>Pairing button enable</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Pairing button timeout</name>
+<value>10</value>
+</attr>
+<attr>
+<name>Pairing filter level</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Pairing mechanism</name>
+<value>Protocol master pairing signal</value>
+</attr>
+<attr>
+<name>Pairing minimum RSSI</name>
+<value>-20</value>
+</attr>
+<attr>
+<name>Product ID filter mask</name>
+<value>00000000</value>
+</attr>
+<attr>
+<name>Product ID filter ref</name>
+<value>00000000</value>
+</attr>
+<attr>
+<name>RF channel mask</name>
+<value>7FFFE</value>
+</attr>
+<attr>
+<name>Range extender</name>
+<value>CC2590 (HGM)</value>
+</attr>
+<attr>
+<name>Target TX power</name>
+<value>5</value>
+</attr>
+<attr>
+<name>Timeslot alignment LBT threshold</name>
+<value>-40</value>
+</attr>
+</task>
+<task>
+<name>Status Indication</name>
+<attr>
+<name>ACTIVE LED pattern</name>
+<value>100,0</value>
+</attr>
+<attr>
+<name>ALONE LED pattern</name>
+<value>2,98</value>
+</attr>
+<attr>
+<name>Alternate status LED usage</name>
+<value>None</value>
+</attr>
+<attr>
+<name>LOW BATTERY LED pattern</name>
+<value>2,23</value>
+</attr>
+<attr>
+<name>LOW BATTERY pattern enable</name>
+<value>0</value>
+</attr>
+<attr>
+<name>PAIRING LED pattern</name>
+<value>2,16,2,80</value>
+</attr>
+<attr>
+<name>Power-down indication enable</name>
+<value>0</value>
+</attr>
+<attr>
+<name>STANDBY LED pattern</name>
+<value>50,50</value>
+</attr>
+<attr>
+<name>Status LED enable</name>
+<value>1</value>
+</attr>
+</task>
+<task>
+<name>User Interface</name>
+<attr>
+<name>Button custom timing setup</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Click + repeat delay</name>
+<value>40</value>
+</attr>
+<attr>
+<name>Click + repeat minimum idle time</name>
+<value>10</value>
+</attr>
+<attr>
+<name>Click + repeat period</name>
+<value>10</value>
+</attr>
+<attr>
+<name>Click maximum hold time</name>
+<value>100</value>
+</attr>
+<attr>
+<name>Click minimum idle time</name>
+<value>20</value>
+</attr>
+<attr>
+<name>Fast forward</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Hold delay</name>
+<value>160</value>
+</attr>
+<attr>
+<name>Hold minimum idle time</name>
+<value>20</value>
+</attr>
+<attr>
+<name>Input volume mute</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Network standby disable</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Network standby enable</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Network standby toggle</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Output volume decrement</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Output volume increment</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Output volume mute</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Play-Pause</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Repeat delay</name>
+<value>160</value>
+</attr>
+<attr>
+<name>Repeat minimum idle time</name>
+<value>10</value>
+</attr>
+<attr>
+<name>Repeat period</name>
+<value>10</value>
+</attr>
+<attr>
+<name>Rewind</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Scan next track</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Scan previous track</name>
+<value>0</value>
+</attr>
+<attr>
+<name>State minimum idle time</name>
+<value>10</value>
+</attr>
+</task>
+<task>
+<name>Volume Control Master</name>
+<attr>
+<name>Local input button step amount</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Local input buttons</name>
+<value>None</value>
+</attr>
+<attr>
+<name>Local input default</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Local input fixed offset</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Local input minimum</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Local input step duration</name>
+<value>8</value>
+</attr>
+<attr>
+<name>Local output button step amount</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Local output buttons</name>
+<value>None</value>
+</attr>
+<attr>
+<name>Local output default</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Local output fixed offset</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Local output minimum</name>
+<value>-50.0</value>
+</attr>
+<attr>
+<name>Local output step duration</name>
+<value>8</value>
+</attr>
+<attr>
+<name>Remote input button step amount</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Remote input buttons</name>
+<value>None</value>
+</attr>
+<attr>
+<name>Remote input default</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Remote input minimum</name>
+<value>-50.0</value>
+</attr>
+<attr>
+<name>Remote output button step amount</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Remote output buttons</name>
+<value>None</value>
+</attr>
+<attr>
+<name>Remote output default</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Remote output minimum</name>
+<value>-50.0</value>
+</attr>
+</task>
+<task>
+<name>Volume Control Slave</name>
+<attr>
+<name>Local input button step amount</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Local input buttons</name>
+<value>None</value>
+</attr>
+<attr>
+<name>Local input control source</name>
+<value>Local</value>
+</attr>
+<attr>
+<name>Local input default</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Local input fixed offset</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Local input minimum</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Local input multi-channel offset enable</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Local input step duration</name>
+<value>8</value>
+</attr>
+<attr>
+<name>Local output button step amount</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Local output buttons</name>
+<value>Volume up/down + mute toggle</value>
+</attr>
+<attr>
+<name>Local output control source</name>
+<value>Local</value>
+</attr>
+<attr>
+<name>Local output default</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Local output fixed offset</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Local output minimum</name>
+<value>-50.0</value>
+</attr>
+<attr>
+<name>Local output multi-channel offset enable</name>
+<value>0</value>
+</attr>
+<attr>
+<name>Local output step duration</name>
+<value>10</value>
+</attr>
+<attr>
+<name>Output balance button step amount</name>
+<value>1</value>
+</attr>
+<attr>
+<name>Output balance buttons</name>
+<value>None</value>
+</attr>
+<attr>
+<name>Output balance default</name>
+<value>0.0</value>
+</attr>
+<attr>
+<name>Output balance maximum attenuation</name>
+<value>20.0</value>
+</attr>
+</task>
+</devcfg>

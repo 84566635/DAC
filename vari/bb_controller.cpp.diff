@@ -1,0 +1,223 @@
+Index: bb_controller.cpp
+===================================================================
+--- bb_controller.cpp	(revision 541)
++++ bb_controller.cpp	(revision 662)
+@@ -95,12 +95,13 @@
+   {0x51, 6, MessageType_::NEG_CONFIRMATION, 0x50, 0, 6, 0},
+   {0x52, 6, MessageType_::CONF_TIMEOUT, 0x53, 0x03, 6, 300},
+   {0x53, 6, MessageType_::NEG_CONFIRMATION, 0x52, 0, 6, 0},
++  {0x55, 15, MessageType_::PER_GEN, 0x55, 0, 15, 0},
+   {0x58, 6, MessageType_::CONF_TIMEOUT, 0x59, 0x03, 6, 300},
+   {0x59, 6, MessageType_::NEG_CONFIRMATION, 0x58, 0, 6, 0},
+   {0x5A, 6, MessageType_::CONF_TIMEOUT, 0x5B, 0x02, 6, 300},
+   {0x5B, 6, MessageType_::NEG_CONFIRMATION, 0x5A, 0, 6, 0},
+-  {0x60, 6, MessageType_::PER_GEN, 0, 0, 6, 0},
+-  {0x70, 6, MessageType_::PER_GEN, 0, 0, 6, 0},
++  {0x60, 7, MessageType_::PER_GEN, 0, 0, 6, 0},
++  {0x70, 7, MessageType_::PER_GEN, 0, 0, 6, 0},
+   {0x80, 6, MessageType_::CONF_TIMEOUT, 0x81, 0x03, 6, 300},
+   {0x81, 6, MessageType_::NEG_CONFIRMATION, 0x80, 0, 6, 0},
+   {0x90, 8, MessageType_::CONF_TIMEOUT, 0x00, 0x03, 1, 300},
+@@ -115,7 +116,7 @@
+   {0x9D, 7, MessageType_::NEG_CONFIRMATION, 0x9C, 0, 0, 0},
+   {0xA0, 6, MessageType_::PER_GEN, 0, 0, 0, 0},
+   {0xB0, 7, MessageType_::PER_GEN, 0, 0, 0, 0},
+-  {0xB1, 8, MessageType_::PER_GEN, 0, 0, 0, 0},
++  {0xB1, 9, MessageType_::PER_GEN, 0, 0, 0, 0},
+   {0xF0, 0, MessageType_::CONF_TIMEOUT, 0xF1, 0, 0, 500},
+   {0xF1, 6, MessageType_::NEG_CONFIRMATION, 0xF0, 0, 0, 0},
+   {0xF2, 3, MessageType_::CONF_TIMEOUT, 0xF3, 0, 0, 100},
+@@ -223,6 +224,118 @@
+   return 0;
+ }
+ 
++#define DBUF_LEN 512
++typedef struct
++{
++  uint8_t len;
++  uint8_t dir:1;//0 - to MADO, 1- from MADO
++  uint8_t mark:7;//Marker
++  time_t t;
++  uint8_t buf[32];
++} dBuf_t;
++
++static dBuf_t dBuffer[DBUF_LEN];
++static uint32_t dBufSize = 0;
++static uint32_t dBufHead = 0;
++static uint32_t dBufTail = 0;
++static uint32_t dBufFlushNow = 0;
++static FILE *dBufFile = NULL;
++#define DBUF_FLUSH_LIMIT 510
++
++static void dBufAdd(uint8_t dir, uint8_t *buf, uint32_t len)
++{
++  if(dBufFile == NULL) return;
++  uint8_t mark = 0;
++  if(len < 1) return;
++  switch(buf[0])
++    {
++    default:
++      return;
++    case 0x50:
++    case 0x51:
++    case 0x52:
++    case 0x53:
++    case 0xA0:
++      mark = 1;
++      break;
++    case 0x58:
++      mark = 2;
++      dBufFlushNow = 1;
++      break;
++    case 0xB0:
++    case 0xB1:
++      switch(buf[3])
++        {
++        case 0xC1:
++        case 0xD1:
++          mark++;//5
++        case 0xA1 ... 0xA2:
++          mark++;//4
++        case 0xB0 ... 0xBF:
++          mark += 3;//3
++          dBufFlushNow = 1;
++          break;
++        }
++
++      break;
++    case 0x55:
++    case 0x59:
++    case 0x5A:
++    case 0x5B:
++    case 0x60:
++    case 0x70:
++    case 0x80:
++    case 0x81:
++    case 0x90:
++    case 0x92:
++    case 0x93:
++    case 0x94:
++    case 0x96:
++    case 0x98:
++    case 0x9C:
++    case 0x9D:
++      //case 0xA2:
++      //case 0xA3:
++      break;
++    }
++
++  dBuffer[dBufTail].t = time(NULL);
++  memcpy(dBuffer[dBufTail].buf, buf, len);
++  dBuffer[dBufTail].len = len;
++  dBuffer[dBufTail].dir = dir;
++  dBuffer[dBufTail].mark = mark;
++  dBufTail  = (dBufTail+1)%DBUF_LEN;
++  if(dBufSize == DBUF_LEN)
++    {
++      dBufHead  = (dBufHead+1)%DBUF_LEN;
++    }
++  else
++    {
++      dBufSize++;
++    }
++
++}
++static const char markCh[] = {' ', '1', '2', '3', '4', '5', '6', '7', '8', '9'};
++static void dBufFlush(FILE *file)
++{
++  int i;
++
++  while(dBufSize)
++    {
++      char myTime[100];
++      ctime_r(&dBuffer[dBufHead].t, myTime);
++      myTime[24] = 0;
++      fprintf(file, "%s%c %s %s", dBuffer[dBufHead].mark?"\n!!":"  ", markCh[dBuffer[dBufHead].mark], myTime, dBuffer[dBufHead].dir?"<-   ":"  -> ");
++      for(i=0; i < dBuffer[dBufHead].len; i++)
++        fprintf(file, "%02x ", dBuffer[dBufHead].buf[i]);
++      fprintf(file, "\n");
++
++      dBufHead  = (dBufHead+1)%DBUF_LEN;
++      dBufSize--;
++    }
++  fflush(file);
++}
++#define DO_NOT_AGREGATE
+ int receive_serial_data_B()
+ {
+   int l;
+@@ -254,10 +367,28 @@
+                     }
+                   if ((send_buffer_udp_size + msi.length) <= UDP_BUF_SIZE)  				/// leave loop if we would overflow udp_buffer
+                     {
+-                      memcpy(send_buffer_udp + send_buffer_udp_size, rec_buffer_B, msi.length);
+-                      send_buffer_udp_size += msi.length;
++#ifndef DO_NOT_AGREGATE
++		      if(msi.command != 0x55)
++			{
++			  memcpy(send_buffer_udp + send_buffer_udp_size, rec_buffer_B, msi.length);
++			  send_buffer_udp_size += msi.length;
++			}
++#else
++		      {
++			adr_len = sizeof(remaddr);
++			int udp_succes, try_cnt { 3 };
++			do
++			  {
++			    udp_succes = sendto(fd_udp, rec_buffer_B, msi.length, 0, (struct sockaddr *)&remaddr, adr_len);
++			  }
++			while (udp_succes < 0 && try_cnt-- > 0);
++		      }
++#endif
++
+                       if (host_addr_set)
+                         {
++                          dBufAdd(1, rec_buffer_B, msi.length);
++
+                           if (msi.command == 0x48 || msi.command == 0x50 || msi.command == 0x52 || msi.command == 0x58 || msi.command == 0x5a || msi.command == 0x80 || msi.command == 0x94)
+                             {
+ for(auto &host : list_of_ids)
+@@ -718,7 +849,7 @@
+ //    if (pthread_setschedparam(this_thread, SCHED_IDLE, &sched_params) != 0) std::cout << "Unsuccessful in setting thread priority\n";
+   if (argc < 4)
+     {
+-      std::cout << "Usage: 'bb_controller udp_port serial_port_A serial_port_B\n";
++      std::cout << "Usage: 'bb_controller udp_port serial_port_A serial_port_B [logFile]\n";
+       return -1;
+     }
+   fd_watchdog = open("/dev/watchdog", O_WRONLY);
+@@ -802,9 +933,25 @@
+   poll_udp.events = POLLIN;
+   poll_udp.revents = 0;
+ 
++  if(argc >= 5)
++    dBufFile = fopen(argv[4], "a");
++  struct timeval dBufTime;
++  gettimeofday(&dBufTime, NULL);
+   do
+     {
+-
++      if(dBufFile != NULL)
++        {
++          struct timeval act_time, add_time;
++          gettimeofday(&act_time, NULL);
++          if (timercmp(&act_time, &dBufTime, >) || dBufFlushNow || dBufSize > DBUF_FLUSH_LIMIT)
++            {
++              add_time.tv_sec = 10;
++              add_time.tv_usec = 0;
++              timeradd(&act_time, &add_time, &dBufTime);
++              dBufFlushNow = 0;
++              dBufFlush(dBufFile);
++            }
++        }
+ #ifdef HAVE_LEDS
+       control_leds();
+ #endif
+@@ -839,6 +986,7 @@
+             {
+               if (command[0] == msi.command)
+                 {
++                  dBufAdd(0, command.data(), msi.length);
+                   processing_command = true;
+ //                    std::cout << "Command: " << (int)msi.command << std::endl;
+                   if (command.size() == msi.length || (!msi.length && (command.size() > 0)))

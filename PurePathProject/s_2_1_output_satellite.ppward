@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE application_role SYSTEM "application_role_definition.dtd"[]>
+<!--
+By editing and changing this file the PurePath Wireless Configurator is to be regarded as Alpha Software.
+Limited testing has been performed and the use of this is expected to exhibit problems,
+which can range from mild to severe. The software is not fully qualified to Texas Instrument specifications
+and is intended for evaluation purpose only and is not approved for production usage.
+
+By editing or changing the content of this file, the user agrees to the following:
+THE SOFTWARE ORDERED HEREUNDER IS NOT FULLY QUALIFIED TO TI SPECIFICATIONS.
+NOTWITHSTANDING ANY PROVISION TO THE CONTRARY, TI MAKES NO WARRANTY, EXPRESSED, IMPLIED OR STATUTORY,
+INCLUDING ANY IMPLIED WARRANTY OF MERCHANTABILITY OR FITNESS FOR A SPECIFIC PURPOSE, OF THIS SOFTWARE.
+-->
+<application_role>
+    <name>Slave/2.1 output satellite</name>
+    <alias>Slave/2.1 speaker</alias>
+    <pwc_rev>1.4.2</pwc_rev>
+    <aif_input_count>0</aif_input_count>
+    <aif_output_count>3</aif_output_count>
+    <hardware_platform_list>PurePath Wireless EB,CC85XX Headset,Custom design</hardware_platform_list>
+    <operation_list>Autonomous,Host control</operation_list>
+    <streaming_format_encoders></streaming_format_encoders>
+    <streaming_format_decoders>PCM16,PCMLF,SLAC,PCME24</streaming_format_decoders>
+</application_role>
