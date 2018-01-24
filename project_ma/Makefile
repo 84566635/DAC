@@ -172,7 +172,7 @@ endif
 
 $(PROJNAME): $(OBJ)
 	@$(ECHO) 'Building $(PROJNAME)'
-	@$(CC) -o $@ $(OBJ) $(COMMON_CFLAGS) $(CFLAGS) ../libusbaudio/libusb.a
+	$(CC) -o $@ $(OBJ) $(COMMON_CFLAGS) $(CFLAGS) ../libusbaudio/libusb.a
 	@$(OBJCOPY) $(OBJCOPY_FLAGS) -O ihex $@ $@.hex
 	@$(OBJCOPY) $(OBJCOPY_FLAGS) -O binary $@ $@.bin
 	@$(OBJDUMP) -d -S $@ > $@.disasm
