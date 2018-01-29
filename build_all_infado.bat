@@ -20,16 +20,16 @@ cd libusbaudio
 make clean
 make -j6
 cd ..
-cd project_smok 
+cd SMOK 
 make PROJNAME=SMOK clean 
 make -j6  PROJNAME=SMOK RADIO_IMAGE=../PurePathProject/SLAVE.hex  VERSION=VER 
 cd ..
 
-cd project_ma 
+cd MADO 
 make PROJNAME=MA clean 
 make -j6  PROJNAME=MA  RADIO_IMAGE_MSTM=../PurePathProject/MASTER_MULTI_SLAVE_tam.hex RADIO_IMAGE_MSTS=../PurePathProject/MASTER_MULTI_SLAVE_tas.hex RADIO_IMAGE_SSTM=../PurePathProject/MASTER_SINGLE_SLAVE_tam.hex RADIO_IMAGE_SSTS=../PurePathProject/MASTER_SINGLE_SLAVE_tas.hex VERSION=VER CONVERT_DBG=y
 cd ..    
-cd project_ma 
+cd MADO 
 make PROJNAME=MA44 clean 
 make -j6  PROJNAME=MA44 RADIO_IMAGE_MSTM=../PurePathProject/MASTER_MULTI_SLAVE44_tam.hex RADIO_IMAGE_MSTS=../PurePathProject/MASTER_MULTI_SLAVE44_tas.hex RADIO_IMAGE_SSTM=../PurePathProject/MASTER_SINGLE_SLAVE_tam.hex RADIO_IMAGE_SSTS=../PurePathProject/MASTER_SINGLE_SLAVE_tas.hex VERSION=VER CONVERT_DBG=y
 cd ..    
