@@ -3,6 +3,7 @@
 	<name>MADO</name>
 	<comment></comment>
 	<projects>
+		<project>libusbaudio</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>
