@@ -32,24 +32,27 @@
 								</option>
 								<option id="com.atollic.truestudio.as.general.incpath.1040463373" name="Include path" superClass="com.atollic.truestudio.as.general.incpath" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../src"/>
-									<listOptionValue builtIn="false" value="../Libraries/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="../Libraries/Device/ST/STM32F4xx/Include"/>
-									<listOptionValue builtIn="false" value="../Libraries/STM32F4xx_StdPeriph_Driver/inc"/>
 								</option>
 								<inputType id="com.atollic.truestudio.as.input.1094998584" name="Input" superClass="com.atollic.truestudio.as.input"/>
 							</tool>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.gcc.1926089446" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc">
 								<option id="com.atollic.truestudio.gcc.symbols.defined.1308398611" name="Defined symbols" superClass="com.atollic.truestudio.gcc.symbols.defined" useByScannerDiscovery="false" valueType="definedSymbols">
+									<listOptionValue builtIn="false" value="MADO"/>
+									<listOptionValue builtIn="false" value="_USE_XFUNC_OUT"/>
 									<listOptionValue builtIn="false" value="STM32F4xx"/>
-									<listOptionValue builtIn="false" value="STM32F42_43xxx"/>
-									<listOptionValue builtIn="false" value="USE_STDPERIPH_DRIVER"/>
+									<listOptionValue builtIn="false" value="STM32F429_439xx"/>
+									<listOptionValue builtIn="false" value="CC85XX_USE_SLAVE"/>
+									<listOptionValue builtIn="false" value="CONVERT_DBG"/>
+									<listOptionValue builtIn="false" value="HSE_VALUE=&quot;((uint32_t)1000000*cfgnvs.pll_m)&quot;"/>
+									<listOptionValue builtIn="false" value="ISR_SIZE=&quot;(92+16)&quot;"/>
 								</option>
 								<option id="com.atollic.truestudio.gcc.directories.select.1358467816" name="Include path" superClass="com.atollic.truestudio.gcc.directories.select" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../inc"/>
-									<listOptionValue builtIn="false" value="../library/library_STM32F4xx/inc"/>
-									<listOptionValue builtIn="false" value="../library/library_common/inc"/>
-									<listOptionValue builtIn="false" value="../library/freeRTOS/include"/>
-									<listOptionValue builtIn="false" value="../library/freeRTOS/portable/GCC/ARM_CM3"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/library_STM32F4xx/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/library_common/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/freeRTOS/include}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/freeRTOS/portable/GCC/ARM_CM3}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/inc/audio}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/inc/cc85xx}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/ehif_lib/source}&quot;"/>
@@ -63,6 +66,12 @@
 								<option id="com.atollic.truestudio.common_options.target.fpu.1557597065" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" useByScannerDiscovery="false"/>
 								<option id="com.atollic.truestudio.gcc.optimization.prep_garbage.1203585592" name="Prepare dead code removal " superClass="com.atollic.truestudio.gcc.optimization.prep_garbage" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.atollic.truestudio.gcc.optimization.prep_data.1394527423" name="Prepare dead data removal" superClass="com.atollic.truestudio.gcc.optimization.prep_data" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="com.atollic.truestudio.exe.debug.toolchain.gcc.debug.info.1719732941" name="Debug Level" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc.debug.info" useByScannerDiscovery="false" value="com.atollic.truestudio.gcc.debug.info.2" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.gcc.warnings.fatal.381193261" name="Abort compilation on first error" superClass="com.atollic.truestudio.gcc.warnings.fatal" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="com.atollic.truestudio.gcc.warnings.extra.599182725" name="Enable extra warning flags" superClass="com.atollic.truestudio.gcc.warnings.extra" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="com.atollic.truestudio.gcc.warnings.missing_include_dirs.1129402050" name="Warn if a user-supplied include directory does not exist" superClass="com.atollic.truestudio.gcc.warnings.missing_include_dirs" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="com.atollic.truestudio.gcc.misc.otherflags.1472906850" name="Other options" superClass="com.atollic.truestudio.gcc.misc.otherflags" useByScannerDiscovery="false" value="-include cfg.h -Wno-unused-parameter -Wno-unused-variable" valueType="string"/>
+								<option id="com.atollic.truestudio.gcc.warnings.all.1846406693" superClass="com.atollic.truestudio.gcc.warnings.all" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<inputType id="com.atollic.truestudio.gcc.input.981544459" superClass="com.atollic.truestudio.gcc.input"/>
 							</tool>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.ld.1274636956" name="C Linker" superClass="com.atollic.truestudio.exe.debug.toolchain.ld">
@@ -71,8 +80,15 @@
 								<option id="com.atollic.truestudio.common_options.target.instr_set.849133429" name="Instruction set" superClass="com.atollic.truestudio.common_options.target.instr_set" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.instr_set.thumb2" valueType="enumerated"/>
 								<option id="com.atollic.truestudio.common_options.target.fpucore.364756059" name="FPU" superClass="com.atollic.truestudio.common_options.target.fpucore" useByScannerDiscovery="false" value="com.atollic.truestudio.common_options.target.fpucore.None" valueType="enumerated"/>
 								<option id="com.atollic.truestudio.common_options.target.fpu.658807986" name="Floating point" superClass="com.atollic.truestudio.common_options.target.fpu" useByScannerDiscovery="false"/>
-								<option id="com.atollic.truestudio.ld.general.scriptfile.737075491" name="Linker script" superClass="com.atollic.truestudio.ld.general.scriptfile" useByScannerDiscovery="false" value="../stm32f4_flash.ld" valueType="string"/>
+								<option id="com.atollic.truestudio.ld.general.scriptfile.737075491" name="Linker script" superClass="com.atollic.truestudio.ld.general.scriptfile" useByScannerDiscovery="false" value="../stm32f429.ld" valueType="string"/>
 								<option id="com.atollic.truestudio.ld.optimization.do_garbage.378663713" name="Dead code removal " superClass="com.atollic.truestudio.ld.optimization.do_garbage" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="com.atollic.truestudio.ld.general.syscall_lib.1422601607" name="System calls" superClass="com.atollic.truestudio.ld.general.syscall_lib" useByScannerDiscovery="false" value="com.atollic.truestudio.ld.general.syscalls_lib.nothing" valueType="enumerated"/>
+								<option id="com.atollic.truestudio.ld.general.nostdlib.1529075708" name="No startup or default libs" superClass="com.atollic.truestudio.ld.general.nostdlib" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="com.atollic.truestudio.ld.general.nostartfiles.1106737746" name="Do not use standard start files" superClass="com.atollic.truestudio.ld.general.nostartfiles" useByScannerDiscovery="false" value="false" valueType="boolean"/>
+								<option id="com.atollic.truestudio.ld.libraries.list.497969700" name="Libraries" superClass="com.atollic.truestudio.ld.libraries.list" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.ld.libraries.searchpath.2120393349" name="Library search path" superClass="com.atollic.truestudio.ld.libraries.searchpath" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.ld.misc.additional_objects.696407945" name="Additional object files" superClass="com.atollic.truestudio.ld.misc.additional_objects" useByScannerDiscovery="false" valueType="userObjs"/>
+								<option id="com.atollic.truestudio.ld.misc.linkerflags.814955100" name="Other options" superClass="com.atollic.truestudio.ld.misc.linkerflags" useByScannerDiscovery="false" value="-Wl,-cref,-u,Reset_Handler ../../libusbaudio/libusb.a" valueType="string"/>
 								<inputType id="com.atollic.truestudio.ld.input.2047587203" name="Input" superClass="com.atollic.truestudio.ld.input">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>
@@ -109,11 +125,14 @@
 								<option id="com.atollic.truestudio.ldcc.general.scriptfile.837793782" name="Linker script" superClass="com.atollic.truestudio.ldcc.general.scriptfile" value="../stm32f4_flash.ld" valueType="string"/>
 							</tool>
 							<tool id="com.atollic.truestudio.ar.base.880741368" name="Archiver" superClass="com.atollic.truestudio.ar.base"/>
-							<tool id="com.atollic.truestudio.exe.debug.toolchain.secoutput.1524053361" name="Other" superClass="com.atollic.truestudio.exe.debug.toolchain.secoutput"/>
+							<tool id="com.atollic.truestudio.exe.debug.toolchain.secoutput.1524053361" name="Other" superClass="com.atollic.truestudio.exe.debug.toolchain.secoutput">
+								<option id="com.atollic.truestudio.secoutput.general.convert.1958266155" name="Convert build output" superClass="com.atollic.truestudio.secoutput.general.convert" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="com.atollic.truestudio.mbs.convert.833880150" name="Format" superClass="com.atollic.truestudio.mbs.convert" useByScannerDiscovery="false" value="com.atollic.truestudio.mbs.convert.bin" valueType="enumerated"/>
+							</tool>
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="library/freeRTOS/portable/RVDS/ARM_CM3/port.c|library/library_STM32F4xx/src/stm32f4xx_fsmc.c|library/library_STM32F4xx/src/stm32f4xx_wwdg.c|library/library_STM32F4xx/src/stm32f4xx_sdio.c|library/library_STM32F4xx/src/stm32f4xx_rtc.c|library/library_STM32F4xx/src/stm32f4xx_rng.c|library/library_STM32F4xx/src/stm32f4xx_pwr.c|library/library_STM32F4xx/src/stm32f4xx_ltdc.c|library/library_STM32F4xx/src/stm32f4xx_i2c.c|library/library_STM32F4xx/src/stm32f4xx_hash.c|library/library_STM32F4xx/src/stm32f4xx_hash_sha1.c|library/library_STM32F4xx/src/stm32f4xx_hash_md5.c|library/library_STM32F4xx/src/stm32f4xx_fmc.c|library/library_STM32F4xx/src/stm32f4xx_dma2d.c|library/library_STM32F4xx/src/stm32f4xx_dcmi.c|library/library_STM32F4xx/src/stm32f4xx_dbgmcu.c|library/library_STM32F4xx/src/stm32f4xx_dac.c|library/library_STM32F4xx/src/stm32f4xx_cryp.c|library/library_STM32F4xx/src/stm32f4xx_cryp_tdes.c|library/library_STM32F4xx/src/stm32f4xx_cryp_des.c|library/library_STM32F4xx/src/stm32f4xx_cryp_aes.c|library/library_STM32F4xx/src/stm32f4xx_crc.c|library/library_STM32F4xx/src/stm32f4xx_can.c|library/library_STM32F4xx/src/stm32f4xx_adc.c|library/src/uit_monitor.c|library/src/i2c.c|library/src/adc.c|library/src/cc85xx/cc85xx_control_slv.c|library/src/messageProcessorSMOK.c|library/src/audio/audioQueue.c|library/freeRTOS/portable/GCC/ARM_CM3_MPU/port.c|library/freeRTOS/portable/MemMang/heap_3.c|library/freeRTOS/portable/MemMang/heap_2.c|library/freeRTOS/portable/MemMang/heap_1.c|library/freeRTOS/timers.c|src/system_8MHz|src/system_12MHz" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -224,7 +243,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="library/freeRTOS/portable/RVDS/ARM_CM3/port.c|library/library_STM32F4xx/src/stm32f4xx_fsmc.c|library/library_STM32F4xx/src/stm32f4xx_wwdg.c|library/library_STM32F4xx/src/stm32f4xx_sdio.c|library/library_STM32F4xx/src/stm32f4xx_rtc.c|library/library_STM32F4xx/src/stm32f4xx_rng.c|library/library_STM32F4xx/src/stm32f4xx_pwr.c|library/library_STM32F4xx/src/stm32f4xx_ltdc.c|library/library_STM32F4xx/src/stm32f4xx_i2c.c|library/library_STM32F4xx/src/stm32f4xx_hash.c|library/library_STM32F4xx/src/stm32f4xx_hash_sha1.c|library/library_STM32F4xx/src/stm32f4xx_hash_md5.c|library/library_STM32F4xx/src/stm32f4xx_fmc.c|library/library_STM32F4xx/src/stm32f4xx_dma2d.c|library/library_STM32F4xx/src/stm32f4xx_dcmi.c|library/library_STM32F4xx/src/stm32f4xx_dbgmcu.c|library/library_STM32F4xx/src/stm32f4xx_dac.c|library/library_STM32F4xx/src/stm32f4xx_cryp.c|library/library_STM32F4xx/src/stm32f4xx_cryp_tdes.c|library/library_STM32F4xx/src/stm32f4xx_cryp_des.c|library/library_STM32F4xx/src/stm32f4xx_cryp_aes.c|library/library_STM32F4xx/src/stm32f4xx_crc.c|library/library_STM32F4xx/src/stm32f4xx_can.c|library/library_STM32F4xx/src/stm32f4xx_adc.c|library/src/uit_monitor.c|library/src/i2c.c|library/src/adc.c|library/src/cc85xx/cc85xx_control_slv.c|library/src/messageProcessorSMOK.c|library/src/audio/audioQueue.c|library/freeRTOS/portable/GCC/ARM_CM3_MPU/port.c|library/freeRTOS/portable/MemMang/heap_3.c|library/freeRTOS/portable/MemMang/heap_2.c|library/freeRTOS/portable/MemMang/heap_1.c|library/freeRTOS/timers.c|src/system_8MHz|src/system_12MHz" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
