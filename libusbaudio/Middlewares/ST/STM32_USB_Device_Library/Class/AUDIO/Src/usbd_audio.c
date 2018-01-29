@@ -923,7 +923,7 @@ static void AUDIO_REQ_GetCurrent(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef 
  */
 static void AUDIO_REQ_GetRange(USBD_HandleTypeDef *pdev, USBD_SetupReqTypedef *req)
 {
-  int i = 0;
+//  int i = 0;
 
   if(req->wValue == USB_CS_SAM_FREQ_CONTROL)
   {
