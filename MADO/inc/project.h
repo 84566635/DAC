@@ -1,6 +1,8 @@
 #ifndef _PROJECT_H_
 #define _PROJECT_H_
 
+#define VERSION "MA_undefined"
+
 #define STACK_SIZE 0x1000
 #define SPI_CHECK_FREQ 20       //[ms]
 #define TIMEOUT_DATA_MS  20

@@ -19,7 +19,7 @@
 							<option id="com.atollic.truestudio.toolchain_options.mcu.1406102338" name="Microcontroller" superClass="com.atollic.truestudio.toolchain_options.mcu" useByScannerDiscovery="false" value="STM32F429ZI" valueType="string"/>
 							<option id="com.atollic.truestudio.toolchain_options.vendor.259354508" name="Vendor name" superClass="com.atollic.truestudio.toolchain_options.vendor" useByScannerDiscovery="false" value="STMicroelectronics" valueType="string"/>
 							<targetPlatform archList="all" binaryParser="org.eclipse.cdt.core.ELF" id="com.atollic.truestudio.exe.debug.toolchain.platform.1279266029" isAbstract="false" name="Debug platform" osList="all" superClass="com.atollic.truestudio.exe.debug.toolchain.platform"/>
-							<builder buildPath="${workspace_loc:/MADO}/Debug" customBuilderProperties="toolChainpathType=1|toolChainpathString=C:\\Program Files (x86)\\Atollic\\TrueSTUDIO for STM32 9.0.0\\ARMTools\\bin|" id="com.atollic.truestudio.mbs.builder1.231915812" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" superClass="com.atollic.truestudio.mbs.builder1"/>
+							<builder buildPath="${workspace_loc:/MADO}/Debug" customBuilderProperties="toolChainpathType=1|toolChainpathString=C:\\Program Files (x86)\\Atollic\\TrueSTUDIO for STM32 9.0.0\\ARMTools\\bin|" id="com.atollic.truestudio.mbs.builder1.231915812" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="CDT Internal Builder" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.atollic.truestudio.mbs.builder1"/>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.as.801693824" name="Assembler" superClass="com.atollic.truestudio.exe.debug.toolchain.as">
 								<option id="com.atollic.truestudio.common_options.target.endianess.774524167" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess" useByScannerDiscovery="false"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.1254110008" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" useByScannerDiscovery="false" value="STM32F429ZI" valueType="enumerated"/>
@@ -38,9 +38,11 @@
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.gcc.1926089446" name="C Compiler" superClass="com.atollic.truestudio.exe.debug.toolchain.gcc">
 								<option id="com.atollic.truestudio.gcc.symbols.defined.1308398611" name="Defined symbols" superClass="com.atollic.truestudio.gcc.symbols.defined" useByScannerDiscovery="false" valueType="definedSymbols">
 									<listOptionValue builtIn="false" value="MADO"/>
-									<listOptionValue builtIn="false" value="_USE_XFUNC_OUT"/>
+									<listOptionValue builtIn="false" value="DEBUG"/>
 									<listOptionValue builtIn="false" value="STM32F4xx"/>
 									<listOptionValue builtIn="false" value="STM32F429_439xx"/>
+									<listOptionValue builtIn="false" value="RADIO_IMAGE=y"/>
+									<listOptionValue builtIn="false" value="_USE_XFUNC_OUT"/>
 									<listOptionValue builtIn="false" value="CC85XX_USE_SLAVE"/>
 									<listOptionValue builtIn="false" value="CONVERT_DBG"/>
 									<listOptionValue builtIn="false" value="HSE_VALUE=&quot;((uint32_t)1000000*cfgnvs.pll_m)&quot;"/>
@@ -71,7 +73,7 @@
 								<option id="com.atollic.truestudio.gcc.warnings.extra.599182725" name="Enable extra warning flags" superClass="com.atollic.truestudio.gcc.warnings.extra" useByScannerDiscovery="false" value="false" valueType="boolean"/>
 								<option id="com.atollic.truestudio.gcc.warnings.missing_include_dirs.1129402050" name="Warn if a user-supplied include directory does not exist" superClass="com.atollic.truestudio.gcc.warnings.missing_include_dirs" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<option id="com.atollic.truestudio.gcc.misc.otherflags.1472906850" name="Other options" superClass="com.atollic.truestudio.gcc.misc.otherflags" useByScannerDiscovery="false" value="-include cfg.h -Wno-unused-parameter -Wno-unused-variable" valueType="string"/>
-								<option id="com.atollic.truestudio.gcc.warnings.all.1846406693" superClass="com.atollic.truestudio.gcc.warnings.all" useByScannerDiscovery="false" value="true" valueType="boolean"/>
+								<option id="com.atollic.truestudio.gcc.warnings.all.1846406693" name="Enable all warnings about questionable constructions" superClass="com.atollic.truestudio.gcc.warnings.all" useByScannerDiscovery="false" value="true" valueType="boolean"/>
 								<inputType id="com.atollic.truestudio.gcc.input.981544459" superClass="com.atollic.truestudio.gcc.input"/>
 							</tool>
 							<tool id="com.atollic.truestudio.exe.debug.toolchain.ld.1274636956" name="C Linker" superClass="com.atollic.truestudio.exe.debug.toolchain.ld">
@@ -85,7 +87,9 @@
 								<option id="com.atollic.truestudio.ld.general.syscall_lib.1422601607" name="System calls" superClass="com.atollic.truestudio.ld.general.syscall_lib" useByScannerDiscovery="false" value="com.atollic.truestudio.ld.general.syscalls_lib.nothing" valueType="enumerated"/>
 								<option id="com.atollic.truestudio.ld.general.nostdlib.1529075708" name="No startup or default libs" superClass="com.atollic.truestudio.ld.general.nostdlib" useByScannerDiscovery="false" value="false" valueType="boolean"/>
 								<option id="com.atollic.truestudio.ld.general.nostartfiles.1106737746" name="Do not use standard start files" superClass="com.atollic.truestudio.ld.general.nostartfiles" useByScannerDiscovery="false" value="false" valueType="boolean"/>
-								<option id="com.atollic.truestudio.ld.libraries.list.497969700" name="Libraries" superClass="com.atollic.truestudio.ld.libraries.list" useByScannerDiscovery="false"/>
+								<option id="com.atollic.truestudio.ld.libraries.list.497969700" name="Libraries" superClass="com.atollic.truestudio.ld.libraries.list" useByScannerDiscovery="false" valueType="libs">
+									<listOptionValue builtIn="false" value="m"/>
+								</option>
 								<option id="com.atollic.truestudio.ld.libraries.searchpath.2120393349" name="Library search path" superClass="com.atollic.truestudio.ld.libraries.searchpath" useByScannerDiscovery="false"/>
 								<option id="com.atollic.truestudio.ld.misc.additional_objects.696407945" name="Additional object files" superClass="com.atollic.truestudio.ld.misc.additional_objects" useByScannerDiscovery="false" valueType="userObjs"/>
 								<option id="com.atollic.truestudio.ld.misc.linkerflags.814955100" name="Other options" superClass="com.atollic.truestudio.ld.misc.linkerflags" useByScannerDiscovery="false" value="-Wl,-cref,-u,Reset_Handler ../../libusbaudio/libusb.a" valueType="string"/>
@@ -132,7 +136,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="library/freeRTOS/portable/RVDS/ARM_CM3/port.c|library/library_STM32F4xx/src/stm32f4xx_fsmc.c|library/library_STM32F4xx/src/stm32f4xx_wwdg.c|library/library_STM32F4xx/src/stm32f4xx_sdio.c|library/library_STM32F4xx/src/stm32f4xx_rtc.c|library/library_STM32F4xx/src/stm32f4xx_rng.c|library/library_STM32F4xx/src/stm32f4xx_pwr.c|library/library_STM32F4xx/src/stm32f4xx_ltdc.c|library/library_STM32F4xx/src/stm32f4xx_i2c.c|library/library_STM32F4xx/src/stm32f4xx_hash.c|library/library_STM32F4xx/src/stm32f4xx_hash_sha1.c|library/library_STM32F4xx/src/stm32f4xx_hash_md5.c|library/library_STM32F4xx/src/stm32f4xx_fmc.c|library/library_STM32F4xx/src/stm32f4xx_dma2d.c|library/library_STM32F4xx/src/stm32f4xx_dcmi.c|library/library_STM32F4xx/src/stm32f4xx_dbgmcu.c|library/library_STM32F4xx/src/stm32f4xx_dac.c|library/library_STM32F4xx/src/stm32f4xx_cryp.c|library/library_STM32F4xx/src/stm32f4xx_cryp_tdes.c|library/library_STM32F4xx/src/stm32f4xx_cryp_des.c|library/library_STM32F4xx/src/stm32f4xx_cryp_aes.c|library/library_STM32F4xx/src/stm32f4xx_crc.c|library/library_STM32F4xx/src/stm32f4xx_can.c|library/library_STM32F4xx/src/stm32f4xx_adc.c|library/src/uit_monitor.c|library/src/i2c.c|library/src/adc.c|library/src/cc85xx/cc85xx_control_slv.c|library/src/messageProcessorSMOK.c|library/src/audio/audioQueue.c|library/freeRTOS/portable/GCC/ARM_CM3_MPU/port.c|library/freeRTOS/portable/MemMang/heap_3.c|library/freeRTOS/portable/MemMang/heap_2.c|library/freeRTOS/portable/MemMang/heap_1.c|library/freeRTOS/timers.c|src/system_8MHz|src/system_12MHz" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="library/src/m25p20.c|library/freeRTOS/portable/RVDS/ARM_CM3/port.c|library/library_STM32F4xx/src/stm32f4xx_fsmc.c|library/library_STM32F4xx/src/stm32f4xx_wwdg.c|library/library_STM32F4xx/src/stm32f4xx_sdio.c|library/library_STM32F4xx/src/stm32f4xx_rtc.c|library/library_STM32F4xx/src/stm32f4xx_rng.c|library/library_STM32F4xx/src/stm32f4xx_pwr.c|library/library_STM32F4xx/src/stm32f4xx_ltdc.c|library/library_STM32F4xx/src/stm32f4xx_i2c.c|library/library_STM32F4xx/src/stm32f4xx_hash.c|library/library_STM32F4xx/src/stm32f4xx_hash_sha1.c|library/library_STM32F4xx/src/stm32f4xx_hash_md5.c|library/library_STM32F4xx/src/stm32f4xx_fmc.c|library/library_STM32F4xx/src/stm32f4xx_dma2d.c|library/library_STM32F4xx/src/stm32f4xx_dcmi.c|library/library_STM32F4xx/src/stm32f4xx_dbgmcu.c|library/library_STM32F4xx/src/stm32f4xx_dac.c|library/library_STM32F4xx/src/stm32f4xx_cryp.c|library/library_STM32F4xx/src/stm32f4xx_cryp_tdes.c|library/library_STM32F4xx/src/stm32f4xx_cryp_des.c|library/library_STM32F4xx/src/stm32f4xx_cryp_aes.c|library/library_STM32F4xx/src/stm32f4xx_crc.c|library/library_STM32F4xx/src/stm32f4xx_can.c|library/library_STM32F4xx/src/stm32f4xx_adc.c|library/src/uit_monitor.c|library/src/i2c.c|library/src/adc.c|library/src/cc85xx/cc85xx_control_slv.c|library/src/messageProcessorSMOK.c|library/src/audio/audioQueue.c|library/freeRTOS/portable/GCC/ARM_CM3_MPU/port.c|library/freeRTOS/portable/MemMang/heap_3.c|library/freeRTOS/portable/MemMang/heap_2.c|library/freeRTOS/portable/MemMang/heap_1.c|library/freeRTOS/timers.c|src/system_8MHz|src/system_12MHz" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -243,7 +247,7 @@
 						</toolChain>
 					</folderInfo>
 					<sourceEntries>
-						<entry excluding="library/freeRTOS/portable/RVDS/ARM_CM3/port.c|library/library_STM32F4xx/src/stm32f4xx_fsmc.c|library/library_STM32F4xx/src/stm32f4xx_wwdg.c|library/library_STM32F4xx/src/stm32f4xx_sdio.c|library/library_STM32F4xx/src/stm32f4xx_rtc.c|library/library_STM32F4xx/src/stm32f4xx_rng.c|library/library_STM32F4xx/src/stm32f4xx_pwr.c|library/library_STM32F4xx/src/stm32f4xx_ltdc.c|library/library_STM32F4xx/src/stm32f4xx_i2c.c|library/library_STM32F4xx/src/stm32f4xx_hash.c|library/library_STM32F4xx/src/stm32f4xx_hash_sha1.c|library/library_STM32F4xx/src/stm32f4xx_hash_md5.c|library/library_STM32F4xx/src/stm32f4xx_fmc.c|library/library_STM32F4xx/src/stm32f4xx_dma2d.c|library/library_STM32F4xx/src/stm32f4xx_dcmi.c|library/library_STM32F4xx/src/stm32f4xx_dbgmcu.c|library/library_STM32F4xx/src/stm32f4xx_dac.c|library/library_STM32F4xx/src/stm32f4xx_cryp.c|library/library_STM32F4xx/src/stm32f4xx_cryp_tdes.c|library/library_STM32F4xx/src/stm32f4xx_cryp_des.c|library/library_STM32F4xx/src/stm32f4xx_cryp_aes.c|library/library_STM32F4xx/src/stm32f4xx_crc.c|library/library_STM32F4xx/src/stm32f4xx_can.c|library/library_STM32F4xx/src/stm32f4xx_adc.c|library/src/uit_monitor.c|library/src/i2c.c|library/src/adc.c|library/src/cc85xx/cc85xx_control_slv.c|library/src/messageProcessorSMOK.c|library/src/audio/audioQueue.c|library/freeRTOS/portable/GCC/ARM_CM3_MPU/port.c|library/freeRTOS/portable/MemMang/heap_3.c|library/freeRTOS/portable/MemMang/heap_2.c|library/freeRTOS/portable/MemMang/heap_1.c|library/freeRTOS/timers.c|src/system_8MHz|src/system_12MHz" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+						<entry excluding="library/src/m25p20.c|library/freeRTOS/portable/RVDS/ARM_CM3/port.c|library/library_STM32F4xx/src/stm32f4xx_fsmc.c|library/library_STM32F4xx/src/stm32f4xx_wwdg.c|library/library_STM32F4xx/src/stm32f4xx_sdio.c|library/library_STM32F4xx/src/stm32f4xx_rtc.c|library/library_STM32F4xx/src/stm32f4xx_rng.c|library/library_STM32F4xx/src/stm32f4xx_pwr.c|library/library_STM32F4xx/src/stm32f4xx_ltdc.c|library/library_STM32F4xx/src/stm32f4xx_i2c.c|library/library_STM32F4xx/src/stm32f4xx_hash.c|library/library_STM32F4xx/src/stm32f4xx_hash_sha1.c|library/library_STM32F4xx/src/stm32f4xx_hash_md5.c|library/library_STM32F4xx/src/stm32f4xx_fmc.c|library/library_STM32F4xx/src/stm32f4xx_dma2d.c|library/library_STM32F4xx/src/stm32f4xx_dcmi.c|library/library_STM32F4xx/src/stm32f4xx_dbgmcu.c|library/library_STM32F4xx/src/stm32f4xx_dac.c|library/library_STM32F4xx/src/stm32f4xx_cryp.c|library/library_STM32F4xx/src/stm32f4xx_cryp_tdes.c|library/library_STM32F4xx/src/stm32f4xx_cryp_des.c|library/library_STM32F4xx/src/stm32f4xx_cryp_aes.c|library/library_STM32F4xx/src/stm32f4xx_crc.c|library/library_STM32F4xx/src/stm32f4xx_can.c|library/library_STM32F4xx/src/stm32f4xx_adc.c|library/src/uit_monitor.c|library/src/i2c.c|library/src/adc.c|library/src/cc85xx/cc85xx_control_slv.c|library/src/messageProcessorSMOK.c|library/src/audio/audioQueue.c|library/freeRTOS/portable/GCC/ARM_CM3_MPU/port.c|library/freeRTOS/portable/MemMang/heap_3.c|library/freeRTOS/portable/MemMang/heap_2.c|library/freeRTOS/portable/MemMang/heap_1.c|library/freeRTOS/timers.c|src/system_8MHz|src/system_12MHz" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
 					</sourceEntries>
 				</configuration>
 			</storageModule>
@@ -257,6 +261,13 @@
 		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
-	<storageModule moduleId="refreshScope"/>
+	<storageModule moduleId="refreshScope" versionNumber="2">
+		<configuration configurationName="Debug">
+			<resource resourceType="PROJECT" workspacePath="/MADO"/>
+		</configuration>
+		<configuration configurationName="Release">
+			<resource resourceType="PROJECT" workspacePath="/MADO"/>
+		</configuration>
+	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
 </cproject>
