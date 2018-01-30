@@ -1,0 +1,18 @@
+DEFINE BOSON // aktualna wersja
+DEFINE DAC // wersja z LCD
+
+DAC MADO:
+*Inny uart wejściowy (CEN) (256kbaud)
+*Tylko jeden uart wejściowy (PER1) z innym baudrate (256kbaud)
+*Zmniejszyć opóźnienie 0x50
+
+DAC SMOK:
+*Zmniejszyć opóźnienie 0x50
+*modyfikacja komunikatu 0x80 (głośność dla lewej i prawej kolumny) 1) tylko jedno urzadzenie odbiorcze 2)zmiana portu CEN
+*wątek timerowy z zapisem po SPI
+
+*Dodanie dokumentacji
+
+Uruchomienie MADO
+-Symulacja LCD - emulator na PC (USB-UART) 
+-Symulacja Smoka - zwarcie Rx-Tx
