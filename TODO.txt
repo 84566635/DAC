@@ -16,3 +16,10 @@ DAC SMOK:
 Uruchomienie MADO
 -Symulacja LCD - emulator na PC (USB-UART) 
 -Symulacja Smoka - zwarcie Rx-Tx
+
+
+Komunikat 0x94 odpowiadający wyborowi źródła sygnału (SPDIF COAX/TOSLINK, USB, itp.). -> gen. 0x92, 
+Komunikat 0x58 – sterowanie opcjami DSP na Sharc-u, np. która korekcja A/B/C/D
+Komunikat 0x80 – głośność z możliwością realizacji balansu
+Komunikat 0x50 – włączenie - przejście ze Stand_By do włączenia
+Komunikat 0x52 – wyłączenie - przejście ze włączenia w Stand_By 
