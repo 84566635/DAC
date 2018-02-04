@@ -532,7 +532,7 @@ static void initWM88xxInterface(spdifChip_t wmChip, uint32_t rxChannel, wm880x_a
 {
   char data[4];
 
-  int timeout = 10000;
+  int timeout = 1000;
   while ( ( data[0] != 0x05 || data[1] != 0x88 ) && timeout-- )
     {
       WM88XXReadID(wmChip, data);
