@@ -8,10 +8,6 @@
 #define DEVMODE_BOSON 1
 #define DEVMODE_DAC   2
 
-#ifndef DEVICE_MODE
-#define DEVICE_MODE DEVMODE_BOSON
-#endif
-
 #define STACK_SIZE 0x1000
 #define SPI_CHECK_FREQ 20       //[ms]
 #define TIMEOUT_DATA_MS  20
@@ -65,6 +61,7 @@ typedef struct
   volatile int SAIclk[8];
 #define C_TIMEOUT_50     CFG_PATCH(CFG_IDX(timeout50))
   volatile int timeout50; //Czas na odpowiedz na komunikat 50
+#define DEVICE_MODE CFG_PATCH(CFG_IDX(centralDeviceMode))
   volatile int centralDeviceMode; /* possible values: BOSON=1 (and others remaining values as default), DAC=2 */
   volatile int fillup[128-32];    //Fillup to 128 elements
 } __attribute__((packed)) config_t;
