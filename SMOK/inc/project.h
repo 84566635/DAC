@@ -5,6 +5,9 @@
 #define VERSION "SMOK_undefined"
 #endif
 
+#define DEVMODE_BOSON 1
+#define DEVMODE_DAC   2
+
 #define STACK_SIZE 0x1000
 #define  SPI_CHECK_FREQ 20       //[ms]
 #define  TIMEOUT_DATA_MS  20
@@ -28,6 +31,7 @@
 #define MSG_TYPES_QTY       22
 
 #define UART_SPEED 115200
+#define UART_SPEED_DAC 256000
 
 #define LED_BLINKER_NUM 1
 #define LED_BLINKER_SPI_HELPER 0
@@ -103,7 +107,9 @@ typedef struct config_s
   volatile int polar;            //polar1 - bit0, polar2 - bit1
 #define C_TIMEOUT_50     CFG_PATCH(CFG_IDX(timeout50))
   volatile int timeout50; //Czas na odpowiedz na komunikat 50
-  volatile int fillup[128-58];    //Fillup to 128 elements
+#define DEVICE_MODE     CFG_PATCH(CFG_IDX(centralDeviceMode))
+  volatile int centralDeviceMode; /* possible values: BOSON=1 (and others remaining values as default), DAC=2 */
+  volatile int fillup[128-59];    //Fillup to 128 elements
 } __attribute__((packed)) config_t;
 
 #define CONFIG_CONST                                            \
@@ -167,6 +173,7 @@ typedef struct config_s
     CFG_EVAL(pllRetryNum),                                      \
     CFG_EVAL(polar),                                            \
     CFG_EVAL(timeout50),                                        \
+    CFG_EVAL(centralDeviceMode),                                \
   }
 
 #define CONFIG_PRINT()                               \
@@ -227,7 +234,8 @@ typedef struct config_s
   PRINT_CFG(plli2c);                                 \
   PRINT_CFG(pllRetryNum);                            \
   PRINT_CFG(polar);                                  \
-  PRINT_CFG(timeout50);				     \
+  PRINT_CFG(timeout50);				    			 \
+  PRINT_CFG(centralDeviceMode);					     \
  
 
 typedef enum

@@ -232,7 +232,14 @@ void hwBoardInit(void)
   memset((void *)&PER2_UARThelper, 0, sizeof(PER2_UARThelper));
 
   CEN_UARThelper.usart = UART4;
-  USART_INIT(UART4, 1, A, 0, A, 1, UART_SPEED); //CEN
+  if(DEVICE_MODE == DEVMODE_DAC)
+  {
+	  USART_INIT(UART4, 1, A, 0, A, 1, UART_SPEED_DAC); //CEN for DAC
+  }
+  else
+  {
+	  USART_INIT(UART4, 1, A, 0, A, 1, UART_SPEED); //CEN for BOSON
+  }
   USART_INIT_HANDLER(UART4);
 
   PER1_UARThelper.usart = USART2;
