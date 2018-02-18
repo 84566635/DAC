@@ -5,6 +5,13 @@
 #define VERSION "MA_undefined"
 #endif
 
+#define DEVMODE_BOSON 1
+#define DEVMODE_DAC   2
+
+#ifndef DEVICE_MODE
+#define DEVICE_MODE DEVMODE_BOSON
+#endif
+
 #define STACK_SIZE 0x1000
 #define SPI_CHECK_FREQ 20       //[ms]
 #define TIMEOUT_DATA_MS  20
@@ -22,6 +29,7 @@
 
 #define HW_ADDRESS_SIZE 6
 #define UART_SPEED 115200
+#define UART_SPEED_DAC 256000
 #define CONN_MODE_C 1           // konfig po stronie buforów CEN, 1  UART, 2  SPI
 #define CONN_MODE_P 2           // konfig po stronie buforów PER, 1  UART, 2  SPI
 
@@ -57,7 +65,8 @@ typedef struct
   volatile int SAIclk[8];
 #define C_TIMEOUT_50     CFG_PATCH(CFG_IDX(timeout50))
   volatile int timeout50; //Czas na odpowiedz na komunikat 50
-  volatile int fillup[128-31];    //Fillup to 128 elements
+  volatile int centralDeviceMode; /* possible values: BOSON=1 (and others remaining values as default), DAC=2 */
+  volatile int fillup[128-32];    //Fillup to 128 elements
 } __attribute__((packed)) config_t;
 
 #define CONFIG_CONST                                            \
@@ -94,6 +103,7 @@ typedef struct
     CFG_EVAL(SAIclk[6]),                                        \
     CFG_EVAL(SAIclk[7]),                                        \
     CFG_EVAL(timeout50),                                        \
+    CFG_EVAL(centralDeviceMode),                                \
   }                                                             \
  
 #define CONFIG_PRINT()                                          \
@@ -128,7 +138,7 @@ typedef struct
   PRINT_CFG(SAIclk[6]);                                         \
   PRINT_CFG(SAIclk[7]);                                         \
   PRINT_CFG(timeout50);                                         \
- 
+  PRINT_CFG(centralDeviceMode);								     \
 
 
 #define LEDS_NUM        6

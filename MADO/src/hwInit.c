@@ -172,11 +172,16 @@ int spiToSpiNum(void *spi)
 ///////////////////////////////////////////////////////////////////////////////////////
 
 //Utworz handlery przerwan dla SPI i UART
+#if DEVICE_MODE == DEVMODE_DAC
+USART_HANDLER(CEN_PORT, USART6);
+#else /* DEVMODE BOSON */
 #ifndef CEN_ALTER
 USART_HANDLER(CEN_PORT, USART3);
 #else
 USART_HANDLER(CEN_PORT, USART1);
 #endif
+#endif /* endif DEVMODE */
+
 USART_HANDLER(PER1_PORT, USART2);
 USART_HANDLER(PER2_PORT, UART4);
 
@@ -235,6 +240,14 @@ void hwBoardInit(void)
   CLR_HELPER(PER1_UART);
   CLR_HELPER(PER2_UART);
 
+
+#if DEVICE_MODE == DEVMODE_DAC
+  CEN_helper.usart = USART6;
+  USART_INIT(USART6, 2, C, 6, C, 7, UART_SPEED_DAC); //CEN for DAC
+  USART_INIT_HANDLER(USART6);
+
+#else /* DEVMODE BOSON */
+
 #ifndef CEN_ALTER
   CEN_helper.usart = USART3;
   USART_INIT(USART3, 1, D, 8, D, 9, UART_SPEED); //CEN
@@ -244,19 +257,29 @@ void hwBoardInit(void)
   USART_INIT(USART1, 2, A, 9, A, 10, UART_SPEED); //CEN
   USART_INIT_HANDLER(USART1);
 #endif
+#endif /* endif DEVMODE */
 
   PER1_UARThelper.usart = USART2;
   PER2_UARThelper.usart = UART4;
 
   if(cfg.proto & 0x40)
-    {
-      USART_INIT(USART2, 1, A, 2, D, 6, UART_SPEED); //PER1
-    }
+  {
+#if DEVICE_MODE == DEVMODE_DAC
+	  USART_INIT(USART2, 1, A, 2, D, 6, UART_SPEED_DAC); //PER1 for DAC
+#else
+	  USART_INIT(USART2, 1, A, 2, D, 6, UART_SPEED); //PER1 for BOSON
+#endif
+  }
   else
-    {
-      USART_INIT(USART2, 1, A, 2, A, 3, UART_SPEED); //PER1
-    }
+  {
+#if DEVICE_MODE == DEVMODE_DAC
+	  USART_INIT(USART2, 1, A, 2, A, 3, UART_SPEED_DAC); //PER1 for DAC
+#else
+	  USART_INIT(USART2, 1, A, 2, A, 3, UART_SPEED); //PER1 for BOSON
+#endif
+  }
   USART_INIT_HANDLER(USART2);
+
   USART_INIT(UART4, 1, A, 0, A, 1, UART_SPEED); //PER2
   USART_INIT_HANDLER(UART4);
 
