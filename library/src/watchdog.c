@@ -73,5 +73,5 @@ void __attribute__((weak))wdogFail(void)
 
 void watchdogInit(void)
 {
-  massert(xTaskCreate(watchdogTask, (signed char *)"Watchdog", 1024 / 4, NULL, 1, NULL) == pdPASS);
+  massert(xTaskCreate(watchdogTask, (signed char *)"Watchdog", 2048 / 4, NULL, 1, NULL) == pdPASS);
 }
