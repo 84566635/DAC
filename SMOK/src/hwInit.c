@@ -192,6 +192,7 @@ void hwBoardInit(void)
 
   //Load config into ram
   cfgInit();
+  uint32_t devmode = DEVICE_MODE;
 
   USART_INIT(UART5, 1, C, 12, D, 2, 921600); //DEBUG
   xprintf_init(sendChar);
@@ -232,7 +233,7 @@ void hwBoardInit(void)
   memset((void *)&PER2_UARThelper, 0, sizeof(PER2_UARThelper));
 
   CEN_UARThelper.usart = UART4;
-  if(DEVICE_MODE == DEVMODE_DAC)
+  if(devmode == DEVMODE_DAC)
   {
 	  USART_INIT(UART4, 1, A, 0, A, 1, UART_SPEED_DAC); //CEN for DAC
   }

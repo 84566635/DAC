@@ -209,6 +209,8 @@ void hwBoardInit(void)
   //Load config into ram
   cfgInit();
 
+  uint32_t devmode = DEVICE_MODE;
+
   if(cfg.proto&0x1)
     memcpy((void*)leds, (void*)ledsProto, sizeof(leds));
 
@@ -243,7 +245,7 @@ void hwBoardInit(void)
   CLR_HELPER(PER2_UART);
 
 
-  if(DEVICE_MODE == DEVMODE_DAC)
+  if(devmode == DEVMODE_DAC)
   {
 	  CEN_helper.usart = USART6;
 	  USART_INIT(USART6, 2, C, 6, C, 7, UART_SPEED_DAC); //CEN for DAC
@@ -268,7 +270,7 @@ void hwBoardInit(void)
 
   if(cfg.proto & 0x40)
   {
-	  if(DEVICE_MODE == DEVMODE_DAC)
+	  if(devmode == DEVMODE_DAC)
 	  {
 		  USART_INIT(USART2, 1, A, 2, D, 6, UART_SPEED_DAC); //PER1 for DAC
 	  }
@@ -279,7 +281,7 @@ void hwBoardInit(void)
   }
   else
   {
-	  if(DEVICE_MODE == DEVMODE_DAC)
+	  if(devmode == DEVMODE_DAC)
 	  {
 		  USART_INIT(USART2, 1, A, 2, A, 3, UART_SPEED_DAC); //PER1 for DAC
 	  }
