@@ -33,9 +33,6 @@
 								</option>
 								<option id="com.atollic.truestudio.as.general.incpath.1325802755" name="Include path" superClass="com.atollic.truestudio.as.general.incpath" useByScannerDiscovery="false" valueType="includePath">
 									<listOptionValue builtIn="false" value="../src"/>
-									<listOptionValue builtIn="false" value="../Libraries/CMSIS/Include"/>
-									<listOptionValue builtIn="false" value="../Libraries/Device/STM32F4xx/Include"/>
-									<listOptionValue builtIn="false" value="../Libraries/STM32F4xx_StdPeriph_Driver/inc"/>
 								</option>
 								<inputType id="com.atollic.truestudio.as.input.1114395018" name="Input" superClass="com.atollic.truestudio.as.input"/>
 							</tool>
@@ -55,14 +52,14 @@
 									<listOptionValue builtIn="false" value="../src"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/inc}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/inc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MADO/library/inc/cc85xx}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MADO/library/library_common/inc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MADO/library/library_STM32F4xx/inc}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MADO/library/ehif_lib/source}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/inc/cc85xx}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/library_common/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/library_STM32F4xx/inc}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/ehif_lib/source}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/ehif_lib/source/hal}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MADO/library/ehif_lib/source/little_endian}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/ehif_lib/source/little_endian}&quot;"/>
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/freeRTOS/include}&quot;"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/MADO/library/freeRTOS/portable/GCC/ARM_CM3}&quot;"/>
+									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/library/freeRTOS/portable/GCC/ARM_CM3}&quot;"/>
 								</option>
 								<option id="com.atollic.truestudio.common_options.target.endianess.1950974580" name="Endianess" superClass="com.atollic.truestudio.common_options.target.endianess" useByScannerDiscovery="false"/>
 								<option id="com.atollic.truestudio.common_options.target.mcpu.134431698" name="Microcontroller" superClass="com.atollic.truestudio.common_options.target.mcpu" useByScannerDiscovery="false" value="STM32F405VG" valueType="enumerated"/>
@@ -138,9 +135,6 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="SMOK.com.atollic.truestudio.exe.368129542" name="Executable" projectType="com.atollic.truestudio.exe"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="refreshScope" versionNumber="2">
 		<configuration configurationName="Debug">
@@ -148,4 +142,10 @@
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.make.core.buildtargets"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.atollic.truestudio.exe.debug.29467023;com.atollic.truestudio.exe.debug.29467023.;com.atollic.truestudio.exe.debug.toolchain.gcc.720066364;com.atollic.truestudio.gcc.input.196744727">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId="com.atollic.truestudio.mbs.ARMToolsPerProjectProfileC"/>
+		</scannerConfigBuildInfo>
+	</storageModule>
 </cproject>
