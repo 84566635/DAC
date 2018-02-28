@@ -17,6 +17,7 @@
 #include <bqueue.h>
 #include <debug.h>
 #include <watchdog.h>
+#include "dacVolume.h"
 
 
 ///////////////////////////////////////////////////
@@ -35,6 +36,7 @@ void systemInit(void)
   CommunicatorInit();
   HWCommInit();
   debugInit();
+  DACVOLUME_Init();
   tasksInitEnd();
 }
 int main(void)

@@ -24,6 +24,7 @@
 #include <watchdog.h>
 #include <crc.h>
 #include <m25p20.h>
+#include "dacVolume.h"
 
 
 typedef struct
@@ -606,11 +607,11 @@ static int msgVolume(portNum_t portNum, comm_t *comm, bBuffer_t *bBuffer, uint8_
       {
           spkSet.volume = data->volume;
           spkSet.volumeL = data->volumeL;
+          DACVOLUME_SetVolumes(spkSet.volumeL, spkSet.volume);
       }
       else //MODE BOSON
       {
          spkSet.volume = data->volume;
-         spkSet.volumeL = 0;
       }
 
       if(!isOn())
