@@ -1,33 +1,38 @@
 #include "dacVolume.h"
 
-#include <stdint.h>
+#include <stm32f4xx.h>
+#include <stm32f4xx_gpio.h> /* because of buggy stm32f4xx_hwInit.h */
+#include <stm32f4xx_rcc.h> /* because of buggy stm32f4xx_hwInit.h */
+
 #include <FreeRTOS.h>
+#include <task.h>
+#include <semphr.h> /* because of buggy stm32f4xx_hwInit.h */
 
-/* --- Hardware definitions --- */
-#define PGA_MISO     (GPIOE->IDR & (1 << 3))
-#define PGA_SCLK_H    GPIOE->BSRR = (1 << (4  + 0))
-#define PGA_MOSI_H    GPIOE->BSRR = (1 << (5  + 0))
-#define PGA_CS_H      GPIOE->BSRR = (1 << (6  + 0))
-#define PGA_MUTE_H    GPIOE->BSRR = (1 << (2  + 0))
-#define PGA_ZCEN_H    GPIOC->BSRR = (1 << (13 + 0))
-#define PGA_SCLK_L    GPIOE->BSRR = (1 << (4  + 16))
-#define PGA_MOSI_L    GPIOE->BSRR = (1 << (5  + 16))
-#define PGA_CS_L      GPIOE->BSRR = (1 << (6  + 16))
-#define PGA_MUTE_L    GPIOE->BSRR = (1 << (2  + 16))
-#define PGA_ZCEN_L    GPIOC->BSRR = (1 << (13 + 16))
-/* --- End of Hardware definitions --- */
+#include <stm32f4xx_hwInit.h>
 
-/* Micro seconds between every action on SoftSPI bus
+#include "common.h" /* massert */
+
+/*
+ * Micro seconds between every action on SoftSPI bus
  * Complete VolL and VolR exchange time is given by:
  * SPOFTSPI_DELAY_US * 4(actions per bit) * 8(bits) * 2(left and right)
- * Ex: for 2us per action it is equal to 128us.
+ * ex. for 2us per action complete exchange is equal to 128us.
  */
 #define SPOFTSPI_DELAY_US 2
 
-/* Naive us delay approach */
-extern uint32_t SystemCoreClock;
-static delay_us(unsigned int us)
+/*
+ * Period in milliseconds between every volume exchange
+ */
+#define DACVOLUME_PERIOD_MS 20
+
+/*
+ * Naive us delay approach
+ * Depends on external value SystemCoreClock,
+ * which is assumed as externally provided and consistent for every frame.
+ */
+static void delay_us(unsigned int us)
 {
+	extern uint32_t SystemCoreClock;
 	const uint32_t nopsPerUs = SystemCoreClock / 1000000;
 	for(volatile uint32_t i = 0; i<(nopsPerUs*us); i++)
 	{
@@ -35,8 +40,25 @@ static delay_us(unsigned int us)
 	}
 }
 
+/* --- Hardware SoftSPI GPIOS definitions --- */
+#define PGA_MISO     (GPIOE->IDR & (1 << 3))
+#define PGA_SCLK_H    GPIOE->BSRRL = (1 << (4  + 0))
+#define PGA_MOSI_H    GPIOE->BSRRL = (1 << (5  + 0))
+#define PGA_CS_H      GPIOE->BSRRL = (1 << (6  + 0))
+#define PGA_MUTE_H    GPIOE->BSRRL = (1 << (2  + 0))
+#define PGA_ZCEN_H    GPIOC->BSRRL = (1 << (13 + 0))
+#define PGA_SCLK_L    GPIOE->BSRRH = (1 << (4  + 0))
+#define PGA_MOSI_L    GPIOE->BSRRH = (1 << (5  + 0))
+#define PGA_CS_L      GPIOE->BSRRH = (1 << (6  + 0))
+#define PGA_MUTE_L    GPIOE->BSRRH = (1 << (2  + 0))
+#define PGA_ZCEN_L    GPIOC->BSRRH = (1 << (13 + 0))
+
+/*
+ * TBD
+ */
 static void SoftSPI_Init(void)
 {
+
 	GPIO_INIT(E, 4,  OUT, NOPULL);   /* SoftSPI Clock (SCLK) */
 	GPIO_INIT(E, 5,  OUT, NOPULL);   /* SoftSPI MOSI */
 	GPIO_INIT(E, 6,  OUT, NOPULL);   /* SoftSPI Chip Select (CS) */
@@ -49,6 +71,9 @@ static void SoftSPI_Init(void)
 	PGA_MUTE_H;
 }
 
+/*
+ * TBD
+ */
 static uint8_t SoftSPI_Exchange(uint8_t inputData)
 {
 	uint8_t i;
@@ -92,29 +117,35 @@ static void eh_dacvolumeThread(void* pvParameters)
 {
 	(void)pvParameters;
 
-	const uint16_t xDelay = 20 / portTICK_RATE_MS;
-	uint8_t volumeL_noncritical;
-	uint8_t volumeR_noncritical;
+	const uint16_t msDelay = DACVOLUME_PERIOD_MS / portTICK_RATE_MS;
+	uint8_t Volume_L;
+	uint8_t Volume_R;
 
 	while(1)
 	{
-		Volume_L - DACVOLUME_GetVolumeLeft();
-		Volume_R - DACVOLUME_GetVolumeRight();
+		taskENTER_CRITICAL();
+		Volume_L = volumeLeft_shared;
+		Volume_R = volumeRight_shared;
+		taskEXIT_CRITICAL();
 
 		PGA_CS_L;
 		(void)SoftSPI_Exchange(Volume_R);
 		(void)SoftSPI_Exchange(Volume_L);
 		PGA_CS_H;
 
-		vTaskDelay(xDelay);
+		vTaskDelay(msDelay);
 	}
 }
 
-void DACVOLUME_Init()
+uint8_t DACVOLUME_Init()
 {
-	SoftSPI_Init();
-
-	massert(xTaskCreate(eh_dacvolumeThread, (signed char *)"dacVolume", 128, NULL, 1, NULL) == pdPASS);
+	if(cfg.centralDeviceMode == DEVMODE_DAC)
+	{
+		SoftSPI_Init();
+		massert(xTaskCreate(eh_dacvolumeThread, (signed char *)"dacVolume", 128, NULL, 1, NULL) == pdPASS);
+		return 1;
+	}
+	return 0;
 }
 
 void DACVOLUME_SetVolumes(uint8_t volumeLeft, uint8_t volumeRight)
@@ -124,26 +155,3 @@ void DACVOLUME_SetVolumes(uint8_t volumeLeft, uint8_t volumeRight)
 	volumeRight_shared = volumeRight;
 	taskEXIT_CRITICAL();
 }
-
-uint8_t DACVOLUME_GetVolumeLeft(void)
-{
-	uint8_t volumeTmp;
-	taskENTER_CRITICAL();
-	volumeTmp = volumeLeft_shared;
-	taskEXIT_CRITICAL();
-	return volumeTmp;
-}
-
-uint8_t DACVOLUME_GetVolumeRight(void)
-{
-	uint8_t volumeTmp;
-	taskENTER_CRITICAL();
-	volumeTmp = volumeRight_shared;
-	taskEXIT_CRITICAL();
-	return volumeTmp;
-}
-
-
-
-
-
