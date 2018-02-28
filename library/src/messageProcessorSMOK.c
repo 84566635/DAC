@@ -29,6 +29,7 @@
 typedef struct
 {
   uint8_t volume;
+  uint8_t volumeL;
   uint8_t cSharc;
   uint8_t cPWM;
 } spkSet_t;
@@ -601,7 +602,17 @@ static int msgVolume(portNum_t portNum, comm_t *comm, bBuffer_t *bBuffer, uint8_
   msg_80_t *data = (void *)bBuffer->data;
   if(DIRECTION(portNum))
     {
-      spkSet.volume = data->volume;
+      if(cfg.centralDeviceMode == DEVMODE_DAC)
+      {
+          spkSet.volume = data->volume;
+          spkSet.volumeL = data->volumeL;
+      }
+      else //MODE BOSON
+      {
+         spkSet.volume = data->volume;
+         spkSet.volumeL = 0;
+      }
+
       if(!isOn())
         {
           //If not ON state then respond on the message for PWM and SHARC

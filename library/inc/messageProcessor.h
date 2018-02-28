@@ -133,7 +133,7 @@ typedef msg_70_t msg_70r_t;
 #endif
 
 /* Glosnosc - komenda */
-DEF_MSG_6(80, kondPom, urzadzenie, volume, zero1, guiTp);
+DEF_MSG_6(80, kondPom, urzadzenie, volume, volumeL, guiTp);
 typedef msg_80_t msg_80r_t;
 typedef msg_80_t msg_81_t;
 typedef msg_81_t msg_81r_t;
