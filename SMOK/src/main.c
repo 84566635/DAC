@@ -36,7 +36,7 @@ void systemInit(void)
   CommunicatorInit();
   HWCommInit();
   debugInit();
-  DACVOLUME_Init();
+  (void)DACVOLUME_Init();
   tasksInitEnd();
 }
 int main(void)

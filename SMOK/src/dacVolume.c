@@ -54,7 +54,8 @@ static void delay_us(unsigned int us)
 #define PGA_ZCEN_L    GPIOC->BSRRH = (1 << (13 + 0))
 
 /*
- * TBD
+ * Initialize MCU general I/O mode to drive software SPI,
+ * and set it to default states.
  */
 static void SoftSPI_Init(void)
 {
@@ -72,7 +73,12 @@ static void SoftSPI_Init(void)
 }
 
 /*
- * TBD
+ * Exchange data on SPI bus.
+ * Function drives clock and MISO, MOSI lines to exchange data o bus.
+ * Function does not drive CS pin.
+ * Bus timing can be set by SPOFTSPI_DELAY_US macro.
+ * @param inputData 8-bit word to send to bus
+ * @return output 8-bit word from bus
  */
 static uint8_t SoftSPI_Exchange(uint8_t inputData)
 {
@@ -137,15 +143,15 @@ static void eh_dacvolumeThread(void* pvParameters)
 	}
 }
 
-uint8_t DACVOLUME_Init()
+int DACVOLUME_Init()
 {
 	if(cfg.centralDeviceMode == DEVMODE_DAC)
 	{
 		SoftSPI_Init();
 		massert(xTaskCreate(eh_dacvolumeThread, (signed char *)"dacVolume", 128, NULL, 1, NULL) == pdPASS);
-		return 1;
+		return 0;
 	}
-	return 0;
+	return -1;
 }
 
 void DACVOLUME_SetVolumes(uint8_t volumeLeft, uint8_t volumeRight)
