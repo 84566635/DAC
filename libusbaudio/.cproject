@@ -17,7 +17,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="a" artifactName="libusb" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -f" description="" id="com.atollic.truestudio.lib.debug.803423043" name="Debug" parent="com.atollic.truestudio.lib.debug" postbuildStep="cp libusb.a ../libusb.a">
+				<configuration artifactExtension="a" artifactName="libusb" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.staticLib" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.staticLib" cleanCommand="rm -f" description="" id="com.atollic.truestudio.lib.debug.803423043" name="Debug" parent="com.atollic.truestudio.lib.debug" postbuildStep="">
 					<folderInfo id="com.atollic.truestudio.lib.debug.803423043." name="/" resourcePath="">
 						<toolChain id="com.atollic.truestudio.lib.debug.toolchain.753089402" name="Atollic ARM Tools" superClass="com.atollic.truestudio.lib.debug.toolchain">
 							<option id="com.atollic.truestudio.general.runtimelib.473331450" name="Runtime Library" superClass="com.atollic.truestudio.general.runtimelib" useByScannerDiscovery="false" value="com.atollic.truestudio.ld.general.clib.small" valueType="enumerated"/>
