@@ -25,6 +25,7 @@
 #include <i2c.h>
 #include <math.h>
 #include <cfg.h>
+#include <piny_ADC_FPGA.h>
 #include STMINCS(_iwdg)
 
 
@@ -184,10 +185,10 @@ void sharc_spi_init(void)
 void hwBoardInit(void)
 {
   //SPI pullups
-  GPIO_INIT(B, 12, IN, UP);
-  GPIO_INIT(B, 13, IN, UP);
-  GPIO_INIT(B, 14, IN, UP);
-  GPIO_INIT(B, 15, IN, UP);
+  GPIO_INIT(B, 12, IN, UP, PP, 100MHz);
+  GPIO_INIT(B, 13, IN, UP, PP, 100MHz);
+  GPIO_INIT(B, 14, IN, UP, PP, 100MHz);
+  GPIO_INIT(B, 15, IN, UP, PP, 100MHz);
 
 
   //Load config into ram
@@ -203,7 +204,83 @@ void hwBoardInit(void)
 
   //POWER_ON
   GPIO_WriteBit(GPIOC, GPIO_Pin_11, 1);
-  GPIO_INIT(C, 11, OUT, NOPULL);
+  GPIO_INIT(C, 11, OUT, NOPULL, PP, 100MHz);
+
+
+
+  //SPI FPGA
+  //===============
+  GPIO_INIT(E, 10, OUT, NOPULL, PP, 2MHz);     //uC_IO_0
+  GPIO_INIT(E, 11, OUT, NOPULL, PP, 2MHz);     //uC_IO_1
+  GPIO_INIT(E, 12, OUT, NOPULL, PP, 2MHz);     //uC_IO_2
+  GPIO_INIT(E, 13, OUT, NOPULL, PP, 2MHz);     //uC_IO_3
+  GPIO_INIT(E, 14, OUT, NOPULL, PP, 2MHz);     //uC_IO_4
+  GPIO_INIT(E, 15, OUT, NOPULL, PP, 2MHz);     //uC_IO_5
+  //===============
+  //===============
+  GPIO_INIT(D,  0, OUT, NOPULL, PP, 2MHz);     //FREE_IO_0
+  GPIO_INIT(D,  8, OUT, NOPULL, PP, 2MHz);     //FREE_IO_1
+  GPIO_INIT(D,  9, OUT, NOPULL, PP, 2MHz);     //FREE_IO_2
+  GPIO_INIT(D, 10, OUT, NOPULL, PP, 2MHz);     //FREE_IO_3
+  GPIO_INIT(D, 14, OUT, NOPULL, PP, 2MHz);     //FREE_IO_4
+  GPIO_INIT(D, 15, OUT, NOPULL, PP, 2MHz);     //FREE_IO_5
+  //===============
+  //===============
+  GPIO_INIT(G,  4, OUT, NOPULL, PP, 2MHz);     //ADC_SCLK
+  GPIO_INIT(G,  3, OUT, NOPULL, PP, 2MHz);     //ADC_MOSI
+  GPIO_INIT(G,  2, OUT, NOPULL, PP, 2MHz);     //ADC_CS
+  GPIO_INIT(G,  7, OUT, NOPULL, PP, 2MHz);     //uC_IO_5b
+
+  GPIO_INIT(G,  5,  IN, UP, OD, 2MHz);         //ADC_MISO
+  GPIO_INIT(G,  6,  IN, UP, OD, 2MHz);         //ADC_DRDY
+  //===============
+  //===============
+  GPIO_INIT(E,  4, OUT, NOPULL, PP, 2MHz);     //PGA_SCLK
+  GPIO_INIT(E,  5, OUT, NOPULL, PP, 2MHz);     //PGA_MOSI
+  GPIO_INIT(E,  6, OUT, NOPULL, PP, 2MHz);     //PGA_CS
+  GPIO_INIT(E,  2, OUT, NOPULL, PP, 2MHz);     //PGA_MUTE
+  GPIO_INIT(C, 13, OUT, NOPULL, PP, 2MHz);     //PGA_ZCEN
+
+  GPIO_INIT(E,  3,  IN, UP, OD, 2MHz);         //PGA_MISO
+  //===============
+  //===============
+  GPIO_INIT(F,  0, OUT, NOPULL, PP, 2MHz);     //FPGA_CCLK_L
+  GPIO_INIT(F,  1, OUT, NOPULL, PP, 2MHz);     //FPGA_CCLK2_L
+  GPIO_INIT(F,  2, OUT, NOPULL, PP, 2MHz);     //FPGA_DI_L
+  GPIO_INIT(F, 11, OUT, NOPULL, PP, 2MHz);     //FPGA_CS_L
+  GPIO_INIT(F, 15, OUT, NOPULL, OD, 2MHz);     //PROGRAMN_L
+
+	//gpio_pin_cfg(GPIOF, 12,  GPIO_IN_PULL_UP);      //FPGA_DO_L
+	//gpio_pin_cfg(GPIOF, 13,  GPIO_IN_PULL_UP);      //DONE_L
+	//gpio_pin_cfg(GPIOF, 14,  GPIO_IN_PULL_UP);      //INITN_L
+  //===============
+  //===============
+  GPIO_INIT(F, 10, OUT, NOPULL, PP, 2MHz);     //FPGA_CCLK_R
+  GPIO_INIT(F,  9, OUT, NOPULL, PP, 2MHz);     //FPGA_CCLK2_R
+  GPIO_INIT(F,  8, OUT, NOPULL, PP, 2MHz);     //FPGA_DI_R
+  GPIO_INIT(F,  3, OUT, NOPULL, PP, 2MHz);     //FPGA_CS_R
+  GPIO_INIT(F,  7, OUT, NOPULL, OD, 2MHz);     //PROGRAMN_R
+
+	//gpio_pin_cfg(GPIOF, 4,   GPIO_IN_PULL_UP);      //FPGA_DO_R
+	//gpio_pin_cfg(GPIOF, 5,   GPIO_IN_PULL_UP);      //DONE_R
+	//gpio_pin_cfg(GPIOF, 6,   GPIO_IN_PULL_UP);      //INITN_R
+  //===============
+
+
+  GPIO_INIT(F, 12, OUT, NOPULL, PP, 2MHz);     //RST_L
+  GPIO_INIT(F,  4, OUT, NOPULL, PP, 2MHz);     //RST_R
+
+
+
+  PGA_CS_H;
+  PGA_ZCEN_L;
+  PGA_MUTE_H;
+  //ADC_CS_H;
+  PROGRAMN_L_H;
+  PROGRAMN_R_H;
+
+
+
 
   //RST AMP
   if(!cfg.no_rst_amp)
@@ -219,9 +296,9 @@ void hwBoardInit(void)
   powerOFF2();
   powerOFF3();
 
-  GPIO_INIT(A, 11, OUT, NOPULL);
+  GPIO_INIT(A, 11, OUT, NOPULL, PP, 100MHz);
   //SPK SWITCH
-  GPIO_INIT(A, 9, OUT, NOPULL);
+  GPIO_INIT(A, 9, OUT, NOPULL, PP, 100MHz);
 
   xprintf("Wait 1000ms to stabilize power before external devices configuration\n");
   mdelay(1000);
@@ -251,25 +328,28 @@ void hwBoardInit(void)
   USART_INIT_HANDLER(USART3);
 
   //ADC sens
-  GPIO_INIT(B, 1, OUT, NOPULL);
+  GPIO_INIT(B, 1, OUT, NOPULL, PP, 100MHz);
 
   //Watchdog
-  GPIO_INIT(E, 8, OUT, NOPULL);
+  GPIO_INIT(E, 8, OUT, NOPULL, PP, 100MHz);
   wdogAssert(1);
 
   //Polar1/2
   PIN_SET(E, 14, ((cfg.polar>>0)&1));//Polar1
-  GPIO_INIT(E, 14, OUT, NOPULL);
+  GPIO_INIT(E, 14, OUT, NOPULL, PP, 100MHz);
   PIN_SET(E, 15, ((cfg.polar>>1)&1));//Polar2
-  GPIO_INIT(E, 15, OUT, NOPULL);
+  GPIO_INIT(E, 15, OUT, NOPULL, PP, 100MHz);
 
   //PWM_STAT and other PWM status lines
-  GPIO_INIT(A, 12, IN, UP);
-  GPIO_INIT(B, 3, IN, UP);
-  GPIO_INIT(B, 9, IN, UP);
-  GPIO_INIT(C, 14, IN, UP);
-  GPIO_INIT(C, 15, IN, UP);
-  GPIO_INIT(E, 13, IN, UP);
+  GPIO_INIT(A, 12, IN, UP, PP, 100MHz);
+  GPIO_INIT(B, 3, IN, UP, PP, 100MHz);
+  GPIO_INIT(B, 9, IN, UP, PP, 100MHz);
+  GPIO_INIT(C, 14, IN, UP, PP, 100MHz);
+  GPIO_INIT(C, 15, IN, UP, PP, 100MHz);
+  GPIO_INIT(E, 13, IN, UP, PP, 100MHz);
+
+
+
 
   {
     CEN_SPIhelper.moduleNum = 0;
@@ -309,7 +389,7 @@ void hwBoardInit(void)
 
   if(cfg.flags&FLAGS_POWER_CYCLE_VARI_MASK)
     {
-      GPIO_INIT(E, 5, OUT, NOPULL);
+      GPIO_INIT(E, 5, OUT, NOPULL, PP, 100MHz);
       GPIO_WriteBit(GPIOE, GPIO_Pin_5, 1);
       mdelay(100);
       GPIO_WriteBit(GPIOE, GPIO_Pin_5, 0);
@@ -322,23 +402,27 @@ void hwBoardInit(void)
 static const uint8_t config1[2][2][8]=
 {
   {
-    [PLL_48] = {0x01,6,0x09,0xb4,0x07,0x02,0x50,0x40},
-    [PLL_44] = {0x01,6,0x09,0xb4,0x05,0x02,0x50,0x40},
+    [PLL_48] = {0x01,0x06, 0x09,0xB4,0x07,0x02,0x50,0x40},
+    [PLL_44] = {0x01,0x06, 0x09,0xB4,0x05,0x02,0x50,0x40},
   },
   {
-    [PLL_48] = {0x01,6,0x09,0xB4,0x07,0x02,0x50,0x40},
-    [PLL_44] = {0x01,6,0x09,0xB4,0x06,0x02,0x50,0x40},
+    //[PLL_48] = {0x01,0x06, 0x09,0xB4,0x07,0x02,0x50,0x40},
+    //[PLL_44] = {0x01,0x06, 0x09,0xB4,0x06,0x02,0x50,0x40},
+    [PLL_48] = {0x01,0x06, 0x09,0xB4,0x07,0x02,0x50,0x40},
+    [PLL_44] = {0x01,0x06, 0x09,0xB4,0x03,0x02,0x50,0x40},
   }
 };
 static const uint8_t config2[2][2][18]=
 {
   {
-    [PLL_48] = {0x10,16,0x00,0x00,0x00,0x00,0x6d,0x02,0x00,0x00,0x80,0x01,0xaa,0x62,0xfa,0x01,0xf2,0x44},
-    [PLL_44] = {0x10,16,0x00,0x00,0x00,0x00,0x6d,0x02,0x00,0x00,0x04,0x00,0x1b,0x24,0xfa,0x01,0xf2,0x44},
+    [PLL_48] = {0x10,0x10, 0x00,0x00,0x00,0x00,0x6D,0x02,0x00,0x00, 0x80,0x01,0xAA,0x62,0xFA,0x01,0xF2,0x44},
+    [PLL_44] = {0x10,0x10, 0x00,0x00,0x00,0x00,0x6D,0x02,0x00,0x00, 0x04,0x00,0x1B,0x24,0xFA,0x01,0xF2,0x44},
   },
   {
-    [PLL_48] = {0x10,16,0x00,0x00,0x00,0x00,0x6D,0x02,0x00,0x00,0x50,0x00,0xA2,0x82,0xEA,0x61,0xA2,0x64},
-    [PLL_44] = {0x10,16,0x00,0x00,0x00,0x00,0x6D,0x02,0x00,0x00,0x01,0x00,0x02,0x01,0xEA,0x61,0xA2,0x64},
+    //[PLL_48] = {0x10,0x10, 0x00,0x00,0x00,0x00,0x6D,0x02,0x00,0x00, 0x50,0x00,0xA2,0x82,0xEA,0x61,0xA2,0x64},
+    //[PLL_44] = {0x10,0x10, 0x00,0x00,0x00,0x00,0x6D,0x02,0x00,0x00, 0x01,0x00,0x02,0x01,0xEA,0x61,0xA2,0x64},
+    [PLL_48] = {0x10,0x10, 0x00,0x00,0x00,0x00,0x0D,0x02,0x00,0x00, 0x50,0x00,0xA2,0x82,0xEA,0x61,0xA2,0x64},
+    [PLL_44] = {0x10,0x10, 0x00,0x00,0x00,0x00,0x0D,0x02,0x00,0x00, 0xC0,0x01,0x2B,0xE5,0xF5,0xC5,0x92,0x44},
   },
 };
 

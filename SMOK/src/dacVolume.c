@@ -11,6 +11,12 @@
 #include <stm32f4xx_hwInit.h>
 
 #include "common.h" /* massert */
+#include <piny_ADC_FPGA.h>
+
+void Kalibracja_init(void);
+void Kalibracja_(void);
+void delay_us(uint32_t delay);
+
 
 /*
  * Micro seconds between every action on SoftSPI bus
@@ -25,52 +31,7 @@
  */
 #define DACVOLUME_PERIOD_MS 20
 
-/*
- * Naive us delay approach
- * Depends on external value SystemCoreClock,
- * which is assumed as externally provided and consistent for every frame.
- */
-static void delay_us(unsigned int us)
-{
-	extern uint32_t SystemCoreClock;
-	const uint32_t nopsPerUs = SystemCoreClock / 1000000;
-	for(volatile uint32_t i = 0; i<(nopsPerUs*us); i++)
-	{
-		//nop
-	}
-}
 
-/* --- Hardware SoftSPI GPIOS definitions --- */
-#define PGA_MISO     (GPIOE->IDR & (1 << 3))
-#define PGA_SCLK_H    GPIOE->BSRRL = (1 << (4  + 0))
-#define PGA_MOSI_H    GPIOE->BSRRL = (1 << (5  + 0))
-#define PGA_CS_H      GPIOE->BSRRL = (1 << (6  + 0))
-#define PGA_MUTE_H    GPIOE->BSRRL = (1 << (2  + 0))
-#define PGA_ZCEN_H    GPIOC->BSRRL = (1 << (13 + 0))
-#define PGA_SCLK_L    GPIOE->BSRRH = (1 << (4  + 0))
-#define PGA_MOSI_L    GPIOE->BSRRH = (1 << (5  + 0))
-#define PGA_CS_L      GPIOE->BSRRH = (1 << (6  + 0))
-#define PGA_MUTE_L    GPIOE->BSRRH = (1 << (2  + 0))
-#define PGA_ZCEN_L    GPIOC->BSRRH = (1 << (13 + 0))
-
-/*
- * Initialize MCU general I/O mode to drive software SPI,
- * and set it to default states.
- */
-static void SoftSPI_Init(void)
-{
-
-	GPIO_INIT(E, 4,  OUT, NOPULL);   /* SoftSPI Clock (SCLK) */
-	GPIO_INIT(E, 5,  OUT, NOPULL);   /* SoftSPI MOSI */
-	GPIO_INIT(E, 6,  OUT, NOPULL);   /* SoftSPI Chip Select (CS) */
-	GPIO_INIT(E, 3,  IN,  UP);       /* SoftSPI MISO */
-	GPIO_INIT(E, 2,  OUT, NOPULL);   /* PGA_MUTE */
-	GPIO_INIT(C, 13, OUT, NOPULL);   /* PGA_ZCEN */
-
-	PGA_CS_H;
-	PGA_ZCEN_L;
-	PGA_MUTE_H;
-}
 
 /*
  * Exchange data on SPI bus.
@@ -115,7 +76,42 @@ static uint8_t SoftSPI_Exchange(uint8_t inputData)
 	}
 	return outputData;
 }
+//-------------------------------------------------------------------------
+static uint8_t SPI_PGA_Wr_Rd(uint8_t OutputData)
+{
+    uint8_t i;
+    uint8_t InputData = 0;
 
+    delay_us(100);
+
+    for(i=0; i<8; i++)
+        {
+        if(OutputData & 0x80)
+        	PGA_MOSI_H;
+        else
+        	PGA_MOSI_L;
+
+        delay_us(100);
+
+        PGA_SCLK_H;
+
+        delay_us(100);
+
+        InputData <<= 1;
+
+        if (PGA_MISO != 0)
+        	InputData |= 0x01;
+
+        OutputData <<= 1;
+
+    	PGA_SCLK_L;
+
+        delay_us(100);
+        };
+
+    return InputData;
+}
+//-------------------------------------------------------------------------
 static uint8_t volumeLeft_shared;
 static uint8_t volumeRight_shared;
 
@@ -127,6 +123,9 @@ static void eh_dacvolumeThread(void* pvParameters)
 	uint8_t Volume_L;
 	uint8_t Volume_R;
 
+	Kalibracja_();
+	Kalibracja_();
+
 	while(1)
 	{
 		taskENTER_CRITICAL();
@@ -135,8 +134,8 @@ static void eh_dacvolumeThread(void* pvParameters)
 		taskEXIT_CRITICAL();
 
 		PGA_CS_L;
-		(void)SoftSPI_Exchange(Volume_R);
-		(void)SoftSPI_Exchange(Volume_L);
+		(void)SPI_PGA_Wr_Rd(Volume_R);
+		(void)SPI_PGA_Wr_Rd(Volume_L);
 		PGA_CS_H;
 
 		vTaskDelay(msDelay);
@@ -145,9 +144,9 @@ static void eh_dacvolumeThread(void* pvParameters)
 
 int DACVOLUME_Init()
 {
-	if(cfg.centralDeviceMode == DEVMODE_DAC)
+	//if(cfg.centralDeviceMode == DEVMODE_DAC)
+	if(DEVMODE_DAC == DEVMODE_DAC)
 	{
-		SoftSPI_Init();
 		massert(xTaskCreate(eh_dacvolumeThread, (signed char *)"dacVolume", 128, NULL, 1, NULL) == pdPASS);
 		return 0;
 	}
