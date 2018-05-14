@@ -12,7 +12,7 @@
 				</extensions>
 			</storageModule>
 			<storageModule moduleId="cdtBuildSystem" version="4.0.0">
-				<configuration artifactExtension="elf" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="MADO Master Multi-Slave Radio" id="com.atollic.truestudio.exe.debug.1731886109" name="Debug" parent="com.atollic.truestudio.exe.debug" postbuildStep="../../tools/patch.exe ../params_ma.cfg MADO.elf MADO_cfg.elf">
+				<configuration artifactExtension="elf" artifactName="${ProjName}" buildArtefactType="org.eclipse.cdt.build.core.buildArtefactType.exe" buildProperties="org.eclipse.cdt.build.core.buildArtefactType=org.eclipse.cdt.build.core.buildArtefactType.exe" cleanCommand="rm -rf" description="MADO Master Multi-Slave Radio" id="com.atollic.truestudio.exe.debug.1731886109" name="Debug" parent="com.atollic.truestudio.exe.debug" postannouncebuildStep="..\..\..\patch_elfbin_Mado_S1_xDAC.bat    ..\..\..\patch_elfbin_Mado_S1_DAC.bat" postbuildStep="..\..\..\patch_elfbin_Mado_S1.bat">
 					<folderInfo id="com.atollic.truestudio.exe.debug.1731886109." name="/" resourcePath="">
 						<toolChain id="com.atollic.truestudio.exe.debug.toolchain.1728713277" name="Atollic ARM Tools" superClass="com.atollic.truestudio.exe.debug.toolchain">
 							<option id="com.atollic.truestudio.general.runtimelib.371958584" name="Runtime Library" superClass="com.atollic.truestudio.general.runtimelib" useByScannerDiscovery="false" value="com.atollic.truestudio.ld.general.clib.small" valueType="enumerated"/>

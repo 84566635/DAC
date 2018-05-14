@@ -8,6 +8,7 @@ MEMORY
   FLASH1 (rx) :    ORIGIN = 0x08000000+512K, LENGTH = 512K
   SRAM0  (rwx): ORIGIN = 0x20000000, LENGTH = 112K
   SRAM1  (rwx): ORIGIN = 0x10000000, LENGTH = 64K
+  SRAM2  (rwx): ORIGIN = 0x2001C000, LENGTH = 16K
 }
 
 ENTRY(Reset_Handler)
@@ -80,4 +81,12 @@ SECTIONS
 	{
            *(.storage*)
 	} > FLASH1
+	
+	
+   .sram2_data (NOLOAD):
+   {
+     . = ALIGN(4);
+     *(. sram2_data* )
+     . = ALIGN(4);
+   } >SRAM2
 }

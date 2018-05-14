@@ -220,7 +220,7 @@ void hwBoardInit(void)
 
   //MCLK key open
   PIN_SET(D, 5, 0);
-  GPIO_INIT(D, 5, OUT, NOPULL);
+  GPIO_INIT(D, 5, OUT, NOPULL,PP, 100MHz);
 
   //Inicjalizacja LED
   LEDS_INIT();
@@ -245,7 +245,7 @@ void hwBoardInit(void)
   CLR_HELPER(PER2_UART);
 
 
-  if(devmode == DEVMODE_DAC)
+  if(0) //(devmode == DEVMODE_DAC)
   {
 	  CEN_helper.usart = USART6;
 	  USART_INIT(USART6, 2, C, 6, C, 7, UART_SPEED_DAC); //CEN for DAC
@@ -273,10 +273,12 @@ void hwBoardInit(void)
 	  if(devmode == DEVMODE_DAC)
 	  {
 		  USART_INIT(USART2, 1, A, 2, D, 6, UART_SPEED_DAC); //PER1 for DAC
+		  //USART_INIT(USART2, 1, A, 2, D, 6, UART_SPEED); //PER1 for DAC
 	  }
 	  else
 	  {
-		  USART_INIT(USART2, 1, A, 2, D, 6, UART_SPEED); //PER1 for BOSON
+		  USART_INIT(USART2, 1, A, 2, D, 6, UART_SPEED_DAC); //PER1 for BOSON
+		  //USART_INIT(USART2, 1, A, 2, D, 6, UART_SPEED); //PER1 for BOSON
 	  }
   }
   else
@@ -407,9 +409,9 @@ void hwBoardInit(void)
 
     //Request data pin for spiAudioStream(BBB)
     PIN_SET(E, 9, 1);
-    GPIO_INIT(E, 9, OUT, NOPULL);
+    GPIO_INIT(E, 9, OUT, NOPULL,PP, 100MHz);
     PIN_SET(E, 10, 1);
-    GPIO_INIT(E, 10, OUT, NOPULL);
+    GPIO_INIT(E, 10, OUT, NOPULL,PP, 100MHz);
 
     DMA_INIT_SPI_AUDIO_STREAM(SPI4,
                               DMA2, 0, OLINUXINO_DMA_CHANNEL,
@@ -422,11 +424,11 @@ void hwBoardInit(void)
   //SAIA Switch
   if(cfg.proto&0x40)
     {
-      GPIO_INIT(G, 0, OUT, NOPULL);
+      GPIO_INIT(G, 0, OUT, NOPULL,PP, 100MHz);
     }
   else
     {
-      GPIO_INIT(B, 0, OUT, NOPULL);
+      GPIO_INIT(B, 0, OUT, NOPULL,PP, 100MHz);
     }
 
   selectorSet(SELECTOR_SAI);
@@ -434,7 +436,7 @@ void hwBoardInit(void)
   if(cfg.proto&0x1)
     {
       //SAIB Switch
-      GPIO_INIT(B, 1, OUT, NOPULL);
+      GPIO_INIT(B, 1, OUT, NOPULL,PP, 100MHz);
       PIN_SET(B, 1, 0);
     }
 
@@ -445,7 +447,7 @@ void hwBoardInit(void)
   //USB
   //ULPI reset
   PIN_SET(D, 2, 1);
-  GPIO_INIT(D, 2, OUT, NOPULL);
+  GPIO_INIT(D, 2, OUT, NOPULL,PP, 100MHz);
 
   registerIRQ(OTG_HS_IRQn, OTG_HS_IRQHandler);
   NVIC_SetPriority(OTG_HS_IRQn, configMAX_SYSCALL_INTERRUPT_PRIORITY);
@@ -671,20 +673,20 @@ static void initWM88xxConfig(void)
   //GPIO_INIT(B, 7, IN, UP);
 
   //WM8805 mode select: SW/HW
-  GPIO_INIT(G, 14, OUT, NOPULL);//B15
+  GPIO_INIT(G, 14, OUT, NOPULL,PP, 100MHz);//B15
   SPI_CS_INIT(G, 8);
   //reset pin U4 U6
-  GPIO_INIT(C, 14, OUT, NOPULL);
+  GPIO_INIT(C, 14, OUT, NOPULL,PP, 100MHz);
   //reset pin U1 U2
-  GPIO_INIT(C, 13, OUT, NOPULL);
+  GPIO_INIT(C, 13, OUT, NOPULL,PP, 100MHz);
 
   RESET_WM5(RST_INACTIVE);
 
   //Disable others WM88XX
-  GPIO_INIT(G, 8, OUT, NOPULL);//
-  GPIO_INIT(G, 9, OUT, NOPULL);//
-  GPIO_INIT(G, 10, OUT, NOPULL);//
-  GPIO_INIT(G, 11, OUT, NOPULL);//
+  GPIO_INIT(G, 8, OUT, NOPULL,PP, 100MHz);//
+  GPIO_INIT(G, 9, OUT, NOPULL,PP, 100MHz);//
+  GPIO_INIT(G, 10, OUT, NOPULL,PP, 100MHz);//
+  GPIO_INIT(G, 11, OUT, NOPULL,PP, 100MHz);//
   PIN_SET(G, 8, 1);
   PIN_SET(G, 9, 1);
   PIN_SET(G, 10, 1);
@@ -710,12 +712,12 @@ static void initWM88xxConfig(void)
   // SRC_SEL_RADIO1(RADIO1_SRC_WM8805_1);
   if(cfg.proto & 0x40)
     {
-      GPIO_INIT(G, 0, OUT, NOPULL);
+      GPIO_INIT(G, 0, OUT, NOPULL,PP, 100MHz);
       PIN_SET(G, 0, RADIO1_SRC_SAI_A);
     }
   else
     {
-      GPIO_INIT(B, 0, OUT, NOPULL);
+      GPIO_INIT(B, 0, OUT, NOPULL,PP, 100MHz);
       PIN_SET(B, 0, RADIO1_SRC_SAI_A);
     }
 

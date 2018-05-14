@@ -536,12 +536,12 @@ void releasePin(GPIO_TypeDef *GPIOx, uint16_t GPIO_Pin);
 
 void configureCKINpin(void);
 
-#define GPIO_INIT(arg_gpio, arg_pin, arg_mode, arg_pull)	\
+#define GPIO_INIT(arg_gpio, arg_pin, arg_mode, arg_pull, arg_Type, arg_Speed)	\
   {                 \
     GPIO_InitTypeDef  GPIO_InitStructure;       \
     GPIO_InitStructure.GPIO_Mode = GPIO_Mode_##arg_mode;    \
-    GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;      \
-    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;      \
+    GPIO_InitStructure.GPIO_OType = GPIO_OType_##arg_Type;      \
+    GPIO_InitStructure.GPIO_Speed = GPIO_Speed_##arg_Speed;      \
     GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_##arg_pull;      \
     GPIO_InitStructure.GPIO_Pin = GPIO_Pin_##arg_pin;     \
     RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIO##arg_gpio, ENABLE);  \

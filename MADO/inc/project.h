@@ -25,7 +25,7 @@
 
 #define HW_ADDRESS_SIZE 6
 #define UART_SPEED 115200
-#define UART_SPEED_DAC 256000
+#define UART_SPEED_DAC 115200 //256000
 #define CONN_MODE_C 1           // konfig po stronie buforów CEN, 1  UART, 2  SPI
 #define CONN_MODE_P 2           // konfig po stronie buforów PER, 1  UART, 2  SPI
 
